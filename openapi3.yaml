@@ -75,6 +75,10 @@ components:
           type: string
           format: uuid
           description: Ingestion job unique identifier
+        flowId:
+          type: string
+          format: uuid
+          description: Ingestion flow unique identifier
         path:
           type: string
           description: Files location path

@@ -4,8 +4,3 @@ export enum Services {
   LOGGER = 'ILogger',
   CONFIG = 'IConfig',
 }
-
-export enum Entities {
-  JOB = 'job',
-  FLOW = 'flow',
-}

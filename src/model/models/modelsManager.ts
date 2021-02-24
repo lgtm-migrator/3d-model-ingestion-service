@@ -1,37 +1,30 @@
-import axios from 'axios';
 import { inject, injectable } from 'tsyringe';
-import { Entities, Services } from '../../common/constants';
+import { v4 as uuid } from 'uuid';
+import { FlowsManager } from '../../flow/models/flowsManager';
+import { JobsManager } from '../../job/models/jobsManager';
+import { Services } from '../../common/constants';
 import { ILogger } from '../../common/interfaces';
-import { Job } from './job';
-import { Model } from './model';
+import { Flow } from '../../common/models/flow';
+import { Job } from '../../common/models/job';
+import { Model } from '../../common/models/model';
 
 @injectable()
 export class ModelsManager {
-  public constructor(@inject(Services.LOGGER) private readonly logger: ILogger) {}
+  public constructor(
+    @inject(Services.LOGGER) private readonly logger: ILogger,
+    private readonly jobs: JobsManager,
+    private readonly flows: FlowsManager
+  ) {}
 
-  public async create(entity: string, url: string, model: Model): Promise<Model> {
-    this.logger.log('info', `Create a new ${entity}: ${JSON.stringify(model)}`);
-    const created = await this.post(url, model);
-    if (entity == Entities.JOB) {
-      model.jobId = (created as Job).jobId;
-    }
+  public async createModel(model: Model): Promise<Model> {
+    this.logger.log('info', `*** Create Model ***`);
+    model.modelId = uuid();
+    const newJob = { path: model.path, metadata: model.metadata } as Job;
+    const createdJob = await this.jobs.createJob(newJob);
+    model.jobId = createdJob.jobId;
+    const newFlow = { jobId: model.jobId, path: model.path, metadata: model.metadata } as Flow;
+    const createdFlow = await this.flows.createFlow(newFlow);
+    model.flowId = createdFlow.flowId;
     return model;
-  }
-
-  private async post(url: string, data: Model): Promise<unknown> {
-    return new Promise((resolve, reject) => {
-      axios({
-        method: 'post',
-        url,
-        data,
-      }).then(
-        (response) => {
-          resolve(response.data);
-        },
-        (error) => {
-          reject(error);
-        }
-      );
-    });
   }
 }

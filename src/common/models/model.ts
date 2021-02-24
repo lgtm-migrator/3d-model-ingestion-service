@@ -1,4 +1,4 @@
-import { Metadata } from './metadata';
+import { Metadata } from '../../common/models/metadata';
 
 export interface Model {
   /**
@@ -9,6 +9,10 @@ export interface Model {
    * Ingestion job unique identifier
    */
   jobId: string;
+  /**
+   * Ingestion flow unique identifier
+   */
+  flowId: string;
   /**
    * Files location path
    */

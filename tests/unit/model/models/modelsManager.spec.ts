@@ -21,6 +21,8 @@ describe('ModelsManager', () => {
 
   describe('#createModel', () => {
     it('resolves without errors', async () => {
+      // jest.spyOn(global.Math, 'random').mockReturnValueOnce(0);
+      // jest.spyOn(global.Date, 'now').mockReturnValueOnce(0);
       const data = { path: createPath(), metadata: createMetadata() } as Model;
       const job = { ...data, jobId: createUuid() };
       const flow = { ...job, flowId: createUuid() };
@@ -29,7 +31,6 @@ describe('ModelsManager', () => {
       flowsManagerMock.createFlow.mockResolvedValue(flow);
 
       const created = await modelsManager.createModel(data);
-      model.modelId = created.modelId;
 
       expect(created).toMatchObject(model);
     });
@@ -38,24 +39,23 @@ describe('ModelsManager', () => {
       const data = { path: createPath(), metadata: createMetadata() } as Model;
       const job = { ...data, jobId: createUuid() };
       const flow = { ...job, flowId: createUuid() };
-      jobsManagerMock.createJob.mockRejectedValue(new Error());
+      jobsManagerMock.createJob.mockRejectedValue(new Error('Job service is not available'));
       flowsManagerMock.createFlow.mockResolvedValue(flow);
 
       const createPromise = modelsManager.createModel(data);
 
-      await expect(createPromise).rejects.toThrow(Error);
+      await expect(createPromise).rejects.toThrow('Job service is not available');
     });
 
     it('rejects if createFlow is not available', async () => {
       const data = { path: createPath(), metadata: createMetadata() } as Model;
       const job = { ...data, jobId: createUuid() };
-      const flow = { ...job, flowId: createUuid() };
       jobsManagerMock.createJob.mockResolvedValue(job);
-      flowsManagerMock.createFlow.mockRejectedValue(new Error());
+      flowsManagerMock.createFlow.mockRejectedValue(new Error('Flow service is not available'));
 
       const createPromise = modelsManager.createModel(data);
 
-      await expect(createPromise).rejects.toThrow(Error);
+      await expect(createPromise).rejects.toThrow('Flow service is not available');
     });
   });
 });

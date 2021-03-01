@@ -4,11 +4,13 @@ import { Application } from 'express';
 import { container } from 'tsyringe';
 import { ServerBuilder } from '../../../../../src/serverBuilder';
 
-export function getApp(): Application {
+let app: Application;
+
+export function init(): void {
   const builder = container.resolve<ServerBuilder>(ServerBuilder);
-  return builder.build();
+  app = builder.build();
 }
 
-export async function createModel(app: Application, request: { path?: unknown; metadata?: unknown }): Promise<supertest.Response> {
-  return supertest.agent(app).post('/models').set('Content-Type', 'application/json').send(request);
+export async function createModel(body: { path?: unknown; metadata?: unknown }): Promise<supertest.Response> {
+  return supertest.agent(app).post('/models').set('Content-Type', 'application/json').send(body);
 }

@@ -14,8 +14,8 @@ const config: Config.InitialOptions = {
   preset: 'ts-jest',
   testEnvironment: 'node',
   collectCoverage: true,
-  collectCoverageFrom: ['<rootDir>/src/model/models/*.ts', '<rootDir>/src/job/models/*.ts', '<rootDir>/src/flow/models/*.ts'],
   coverageReporters: ['text', 'html', 'json'],
+  collectCoverageFrom: ['<rootDir>/src/model/models/*.ts', '<rootDir>/src/job/models/*.ts', '<rootDir>/src/flow/models/*.ts'],
   coverageThreshold: {
     global: {
       branches: 80,

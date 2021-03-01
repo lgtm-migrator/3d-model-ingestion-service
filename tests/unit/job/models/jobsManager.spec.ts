@@ -17,20 +17,22 @@ describe('JobsManager', () => {
   describe('#createJob', () => {
     it('resolves without errors', async () => {
       const data = createFakeJob();
+      const url = config.get<string>('jobUrl');
       postMock.mockResolvedValue(data);
 
       const created = await jobsManager.createJob(data);
 
+      expect(postMock).toHaveBeenCalledWith(url, data);
       expect(created).toMatchObject(data);
     });
 
     it('rejects if service is not available', async () => {
       const data = createFakeJob();
-      postMock.mockRejectedValue(new Error());
+      postMock.mockRejectedValue(new Error('Job service is not available'));
 
       const createPromise = jobsManager.createJob(data);
 
-      await expect(createPromise).rejects.toThrow(Error);
+      await expect(createPromise).rejects.toThrow('Job service is not available');
     });
   });
 });

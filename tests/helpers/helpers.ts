@@ -1,47 +1,53 @@
 /* eslint-disable @typescript-eslint/naming-convention */
 import faker from 'faker';
-import { Job } from '../../src/model/models/job';
-import { Metadata } from '../../src/model/models/metadata';
-import { Model } from '../../src/model/models/model';
+import { Flow } from '../../src/common/models/flow';
+import { Job } from '../../src/common/models/job';
+import { Metadata } from '../../src/common/models/metadata';
+import { Model } from '../../src/common/models/model';
+
+interface IntegrationMetadata extends Omit<Metadata, 'SourceDateStart' | 'SourceDateEnd'> {
+  SourceDateStart: string;
+  SourceDateEnd: string;
+}
 
 export const createUuid = (): string => {
   return faker.random.uuid();
-};
-
-export const createPath = (): string => {
-  return '/usr/share/nginx/downloads';
 };
 
 export const createDate = (): Date => {
   return faker.date.past();
 };
 
+export const createPath = (): string => {
+  return '/usr/share/nginx/downloads';
+};
+
 export const createMetadata = (): Metadata => {
   return {
-    productId: 'string',
-    productName: 'string',
-    geographicArea: 'string',
+    productId: faker.random.word(),
+    productName: faker.random.word(),
+    geographicArea: faker.random.word(),
     productVersion: 1,
     productType: '3DModel',
-    description: 'string',
-    classification: 'string',
-    footprint: 'string',
-    extentLowerLeft: 'string',
-    extentUpperRight: 'string',
+    description: faker.random.word(),
+    classification: faker.random.word(),
+    footprint: faker.random.word(),
+    extentLowerLeft: faker.random.word(),
+    extentUpperRight: faker.random.word(),
     SourceDateStart: createDate(),
     SourceDateEnd: createDate(),
     producerName: 'IDFMU',
-    SRS: 'string',
-    SRSOrigin: 'string',
-    nominalResolution: 'string',
-    accuracyLE90: 'string',
-    horizontalAccuracyCE90: 'string',
-    relativeAccuracyLE90: 'string',
+    SRS: faker.random.word(),
+    SRSOrigin: faker.random.word(),
+    nominalResolution: faker.random.word(),
+    accuracyLE90: faker.random.word(),
+    horizontalAccuracyCE90: faker.random.word(),
+    relativeAccuracyLE90: faker.random.word(),
     heightRangeFrom: 0,
     heightRangeTo: 0,
-    sensor: ['string'],
+    sensor: [faker.random.word()],
     productionMethod: 'Photogrammetric',
-    productionSystem: 'string',
+    productionSystem: faker.random.word(),
   };
 };
 
@@ -49,6 +55,15 @@ export const createFakeJob = (): Job => {
   return { jobId: createUuid(), path: createPath(), metadata: createMetadata(), status: 'In-Progress', created: new Date(), updated: new Date() };
 };
 
+export const createFakeFlow = (): Flow => {
+  return { flowId: createUuid(), jobId: createUuid(), path: createPath(), metadata: createMetadata() };
+};
+
 export const createFakeModel = (): Model => {
-  return { jobId: createUuid(), modelId: createUuid(), path: createPath(), metadata: createMetadata() };
+  return { modelId: createUuid(), jobId: createUuid(), flowId: createUuid(), path: createPath(), metadata: createMetadata() };
+};
+
+export const convertToISOTimestamp = (metadata: Metadata): IntegrationMetadata => {
+  const { SourceDateStart, SourceDateEnd, ...rest } = metadata;
+  return { ...rest, SourceDateStart: SourceDateStart.toISOString(), SourceDateEnd: SourceDateEnd.toISOString() };
 };

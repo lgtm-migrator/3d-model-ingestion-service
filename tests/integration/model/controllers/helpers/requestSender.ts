@@ -2,7 +2,7 @@ import * as supertest from 'supertest';
 import { Application } from 'express';
 
 import { container } from 'tsyringe';
-import { ServerBuilder } from '../../../../src/serverBuilder';
+import { ServerBuilder } from '../../../../../src/serverBuilder';
 
 export function getApp(): Application {
   const builder = container.resolve<ServerBuilder>(ServerBuilder);

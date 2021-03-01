@@ -4,8 +4,8 @@
   "description": "A restful API for creating a new 3d model ingestion flow",
   "main": "./src/index.ts",
   "scripts": {
-    "test:unit": "jest --config=./tests/configurations/unit/jest.config.js",
-    "test:integration": "jest --config=./tests/configurations/integration/jest.config.js",
+    "test:unit": "jest --config=./tests/configurations/unit/jest.config.ts",
+    "test:integration": "jest --config=./tests/configurations/integration/jest.config.ts",
     "format": "prettier --check .",
     "format:fix": "prettier --write .",
     "prelint:fix": "npm run format:fix",
@@ -84,6 +84,7 @@
     "standard-version": "^9.0.0",
     "supertest": "^6.0.1",
     "ts-jest": "^26.3.0",
+    "ts-node": "^9.1.1",
     "typescript": "^3.8.3"
   }
 }

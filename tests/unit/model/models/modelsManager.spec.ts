@@ -1,43 +1,61 @@
-import config from 'config';
-import { Entities } from '../../../../src/common/constants';
+import { Model } from '../../../../src/common/models/model';
 import { ModelsManager } from '../../../../src/model/models/modelsManager';
-import { createFakeModel } from '../../../helpers/helpers';
+import { createMetadata, createPath, createUuid } from '../../../helpers/helpers';
 
 describe('ModelsManager', () => {
   let modelsManager: ModelsManager;
+
+  const jobsManagerMock = {
+    createJob: jest.fn(),
+  };
+  const flowsManagerMock = {
+    createFlow: jest.fn(),
+  };
+
   beforeEach(() => {
-    modelsManager = new ModelsManager({ log: jest.fn() });
+    modelsManager = new ModelsManager({ log: jest.fn() }, jobsManagerMock as any, flowsManagerMock as any);
   });
   afterEach(() => {
     jest.clearAllMocks();
   });
 
-  describe('#create', () => {
-    it('create new job resolves without errors', async () => {
-      const data = createFakeModel();
-      const validUrl = config.get<string>(Entities.JOB + 'Url');
+  describe('#createModel', () => {
+    it('resolves without errors', async () => {
+      const data = { path: createPath(), metadata: createMetadata() } as Model;
+      const job = { ...data, jobId: createUuid() };
+      const flow = { ...job, flowId: createUuid() };
+      const model = { ...flow };
+      jobsManagerMock.createJob.mockResolvedValue(job);
+      flowsManagerMock.createFlow.mockResolvedValue(flow);
 
-      const createPromise = modelsManager.create('', validUrl, data);
+      const created = await modelsManager.createModel(data);
+      model.modelId = created.modelId;
 
-      await expect(createPromise).resolves.not.toThrow();
+      expect(created).toMatchObject(model);
     });
 
-    it('create new flow resolves without errors', async () => {
-      const data = createFakeModel();
-      const validUrl = config.get<string>(Entities.FLOW + 'Url');
+    it('rejects if createJob is not available', async () => {
+      const data = { path: createPath(), metadata: createMetadata() } as Model;
+      const job = { ...data, jobId: createUuid() };
+      const flow = { ...job, flowId: createUuid() };
+      jobsManagerMock.createJob.mockRejectedValue(new Error());
+      flowsManagerMock.createFlow.mockResolvedValue(flow);
 
-      const createPromise = modelsManager.create('', validUrl, data);
+      const createPromise = modelsManager.createModel(data);
 
-      await expect(createPromise).resolves.not.toThrow();
+      await expect(createPromise).rejects.toThrow(Error);
     });
 
-    it('rejects on create failure', async () => {
-      const data = createFakeModel();
-      const invalidUrl = config.get<string>(Entities.JOB + 'Url') + 'xxx';
+    it('rejects if createFlow is not available', async () => {
+      const data = { path: createPath(), metadata: createMetadata() } as Model;
+      const job = { ...data, jobId: createUuid() };
+      const flow = { ...job, flowId: createUuid() };
+      jobsManagerMock.createJob.mockResolvedValue(job);
+      flowsManagerMock.createFlow.mockRejectedValue(new Error());
 
-      const createPromise = modelsManager.create('', invalidUrl, data);
+      const createPromise = modelsManager.createModel(data);
 
-      await expect(createPromise).rejects.toThrow();
+      await expect(createPromise).rejects.toThrow(Error);
     });
   });
 });

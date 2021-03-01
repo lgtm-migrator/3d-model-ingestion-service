@@ -2,7 +2,7 @@ import { inject, injectable } from 'tsyringe';
 import { Services } from '../../common/constants';
 import { IConfig, ILogger } from '../../common/interfaces';
 import { Job } from '../../common/models/job';
-import post from '../../common/utils/post';
+import { Utils } from '../../common/utils';
 
 @injectable()
 export class JobsManager {
@@ -11,7 +11,7 @@ export class JobsManager {
   public async createJob(job: Job): Promise<Job> {
     this.logger.log('info', `Create a new job: ${JSON.stringify(job)}`);
     const url = this.config.get<string>('jobUrl');
-    const created = await post(url, job);
-    return created as Job;
+    const created = await Utils.post<Job>(url, job);
+    return created;
   }
 }

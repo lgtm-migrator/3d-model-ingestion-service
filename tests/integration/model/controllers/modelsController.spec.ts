@@ -1,5 +1,5 @@
-import { Application } from 'express';
 import httpStatusCodes from 'http-status-codes';
+import mockAxios from 'jest-mock-axios';
 import { container } from 'tsyringe';
 import { convertToISOTimestamp, createMetadata, createPath } from '../../../helpers/helpers';
 import { registerTestValues } from '../../testContainerConfig';
@@ -12,6 +12,7 @@ describe('ModelsController', function () {
   });
   afterEach(function () {
     container.reset();
+    mockAxios.reset();
   });
 
   describe('POST /models', function () {
@@ -19,6 +20,8 @@ describe('ModelsController', function () {
       it('should return 201 status code and the added model', async function () {
         const validRequest = { path: createPath(), metadata: createMetadata() };
         const integrationMetadata = convertToISOTimestamp(validRequest.metadata);
+        const model = { ...validRequest };
+        mockAxios.post.mockResolvedValue({ data: model });
 
         const response = await requestSender.createModel(validRequest);
 
@@ -50,11 +53,12 @@ describe('ModelsController', function () {
     describe('Sad Path 😥', function () {
       it('should return 500 status code if a network exception happens', async function () {
         const validRequest = { path: createPath(), metadata: createMetadata() };
+        mockAxios.post.mockRejectedValue(new Error('Service is not available'));
 
         const response = await requestSender.createModel(validRequest);
 
         expect(response.status).toBe(httpStatusCodes.INTERNAL_SERVER_ERROR);
-        expect(response.body).toHaveProperty('message', 'connect ECONNREFUSED 127.0.0.1:8081');
+        expect(response.body).toHaveProperty('message', 'Service is not available');
       });
     });
   });

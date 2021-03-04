@@ -58,6 +58,7 @@ components:
         path:
           type: string
           description: Files location path
+          default: '/tmp/tilesets/TilesetWithDiscreteLOD'
         metadata:
           $ref: '#/components/schemas/metadata'
     model:

@@ -7,6 +7,7 @@ import { ILogger } from '../../common/interfaces';
 import { Flow } from '../../common/models/flow';
 import { Job } from '../../common/models/job';
 import { Model } from '../../common/models/model';
+import { Payload } from '../../common/models/payload';
 
 @injectable()
 export class ModelsManager {
@@ -16,15 +17,11 @@ export class ModelsManager {
     private readonly flows: FlowsManager
   ) {}
 
-  public async createModel(model: Model): Promise<Model> {
+  public async createModel(payload: Payload): Promise<Model> {
     this.logger.log('info', `*** Create Model ***`);
-    model.modelId = uuid();
-    const newJob = { path: model.path, metadata: model.metadata } as Job;
-    const createdJob = await this.jobs.createJob(newJob);
-    model.jobId = createdJob.jobId;
-    const newFlow = { jobId: model.jobId, path: model.path, metadata: model.metadata } as Flow;
-    const createdFlow = await this.flows.createFlow(newFlow);
-    model.flowId = createdFlow.flowId;
-    return model;
+    const createdJob: Job = await this.jobs.createJob(payload);
+    payload.jobId = createdJob.jobId;
+    const createdFlow: Flow = await this.flows.createFlow(payload);
+    return { ...payload, modelId: uuid(), jobId: createdJob.jobId, flowId: createdFlow.flowId } as Model;
   }
 }

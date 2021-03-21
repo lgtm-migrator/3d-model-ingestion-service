@@ -1,6 +1,6 @@
-import { Metadata } from '../../common/models/metadata';
+import { Payload } from './payload';
 
-export interface Flow {
+export interface Flow extends Payload {
   /**
    * Ingestion flow unique identifier
    */
@@ -9,12 +9,4 @@ export interface Flow {
    * Ingestion job unique identifier
    */
   jobId: string;
-  /**
-   * Files location path
-   */
-  path: string;
-  /**
-   * Metadata
-   */
-  metadata: Metadata;
 }

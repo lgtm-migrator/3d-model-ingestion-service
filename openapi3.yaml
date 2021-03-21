@@ -52,19 +52,19 @@ components:
       type: object
       description: 3d model payload
       required:
-        - path
+        - modelPath
         - metadata
       properties:
-        path:
+        modelPath:
           type: string
-          description: Files location path
+          description: Model files location path
         metadata:
           $ref: '#/components/schemas/metadata'
     model:
       type: object
       description: 3d model metadata for 3d model upload
       required:
-        - path
+        - modelPath
         - metadata
       properties:
         modelId:
@@ -79,9 +79,9 @@ components:
           type: string
           format: uuid
           description: Ingestion flow unique identifier
-        path:
+        modelPath:
           type: string
-          description: Files location path
+          description: Model files location path
         metadata:
           $ref: '#/components/schemas/metadata'
     metadata:

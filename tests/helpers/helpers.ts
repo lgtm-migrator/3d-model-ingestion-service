@@ -18,8 +18,8 @@ export const createDate = (): Date => {
   return faker.date.past();
 };
 
-export const createPath = (): string => {
-  return '/usr/share/nginx/downloads';
+export const createModelPath = (): string => {
+  return '/tmp/tilesets/TilesetWithDiscreteLOD';
 };
 
 export const createMetadata = (): Metadata => {
@@ -52,15 +52,22 @@ export const createMetadata = (): Metadata => {
 };
 
 export const createFakeJob = (): Job => {
-  return { jobId: createUuid(), path: createPath(), metadata: createMetadata(), status: 'In-Progress', created: new Date(), updated: new Date() };
+  return {
+    jobId: createUuid(),
+    modelPath: createModelPath(),
+    metadata: createMetadata(),
+    status: 'Pending',
+    created: new Date(),
+    updated: new Date(),
+  };
 };
 
 export const createFakeFlow = (): Flow => {
-  return { flowId: createUuid(), jobId: createUuid(), path: createPath(), metadata: createMetadata() };
+  return { flowId: createUuid(), jobId: createUuid(), modelPath: createModelPath(), metadata: createMetadata() };
 };
 
 export const createFakeModel = (): Model => {
-  return { modelId: createUuid(), jobId: createUuid(), flowId: createUuid(), path: createPath(), metadata: createMetadata() };
+  return { modelId: createUuid(), jobId: createUuid(), flowId: createUuid(), modelPath: createModelPath(), metadata: createMetadata() };
 };
 
 export const convertToISOTimestamp = (metadata: Metadata): IntegrationMetadata => {

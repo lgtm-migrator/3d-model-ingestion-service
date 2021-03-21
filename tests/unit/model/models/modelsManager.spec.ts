@@ -1,6 +1,6 @@
-import { Model } from '../../../../src/common/models/model';
+import { Payload } from '../../../../src/common/models/payload';
 import { ModelsManager } from '../../../../src/model/models/modelsManager';
-import { createMetadata, createPath, createUuid } from '../../../helpers/helpers';
+import { createMetadata, createModelPath, createUuid } from '../../../helpers/helpers';
 
 describe('ModelsManager', () => {
   let modelsManager: ModelsManager;
@@ -21,9 +21,7 @@ describe('ModelsManager', () => {
 
   describe('#createModel', () => {
     it('resolves without errors', async () => {
-      // jest.spyOn(global.Math, 'random').mockReturnValueOnce(0);
-      // jest.spyOn(global.Date, 'now').mockReturnValueOnce(0);
-      const data = { path: createPath(), metadata: createMetadata() } as Model;
+      const data: Payload = { modelPath: createModelPath(), metadata: createMetadata() };
       const job = { ...data, jobId: createUuid() };
       const flow = { ...job, flowId: createUuid() };
       const model = { ...flow };
@@ -36,7 +34,7 @@ describe('ModelsManager', () => {
     });
 
     it('rejects if createJob is not available', async () => {
-      const data = { path: createPath(), metadata: createMetadata() } as Model;
+      const data: Payload = { modelPath: createModelPath(), metadata: createMetadata() };
       const job = { ...data, jobId: createUuid() };
       const flow = { ...job, flowId: createUuid() };
       jobsManagerMock.createJob.mockRejectedValue(new Error('Job service is not available'));
@@ -48,7 +46,7 @@ describe('ModelsManager', () => {
     });
 
     it('rejects if createFlow is not available', async () => {
-      const data = { path: createPath(), metadata: createMetadata() } as Model;
+      const data: Payload = { modelPath: createModelPath(), metadata: createMetadata() };
       const job = { ...data, jobId: createUuid() };
       jobsManagerMock.createJob.mockResolvedValue(job);
       flowsManagerMock.createFlow.mockRejectedValue(new Error('Flow service is not available'));

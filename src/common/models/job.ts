@@ -1,18 +1,10 @@
-import { Metadata } from './metadata';
+import { Payload } from './payload';
 
-export interface Job {
+export interface Job extends Payload {
   /**
    * Ingestion job unique identifier
    */
   jobId: string;
-  /**
-   * Files location path
-   */
-  path: string;
-  /**
-   * Metadata
-   */
-  metadata: Metadata;
   /**
    * Ingestion flow status
    */

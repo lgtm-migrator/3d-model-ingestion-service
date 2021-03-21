@@ -1,12 +1,8 @@
-import { Payload } from './payload';
+import { FlowPayload } from './flowPayload';
 
-export interface Flow extends Payload {
+export interface Flow extends FlowPayload {
   /**
    * Ingestion flow unique identifier
    */
   flowId: string;
-  /**
-   * Ingestion job unique identifier
-   */
-  jobId: string;
 }

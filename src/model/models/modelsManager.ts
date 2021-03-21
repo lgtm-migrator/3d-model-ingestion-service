@@ -20,8 +20,7 @@ export class ModelsManager {
   public async createModel(payload: Payload): Promise<Model> {
     this.logger.log('info', `*** Create Model ***`);
     const createdJob: Job = await this.jobs.createJob(payload);
-    payload.jobId = createdJob.jobId;
-    const createdFlow: Flow = await this.flows.createFlow(payload);
-    return { ...payload, modelId: uuid(), jobId: createdJob.jobId, flowId: createdFlow.flowId } as Model;
+    const createdFlow: Flow = await this.flows.createFlow({ ...payload, jobId: createdJob.jobId });
+    return { ...payload, modelId: uuid(), jobId: createdJob.jobId, flowId: createdFlow.flowId };
   }
 }

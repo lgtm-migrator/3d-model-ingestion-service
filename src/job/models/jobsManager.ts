@@ -12,7 +12,7 @@ export class JobsManager {
   public async createJob(payload: Payload): Promise<Job> {
     this.logger.log('info', `Create a new job: ${JSON.stringify(payload)}`);
     const url = this.config.get<string>('jobUrl');
-    const response = await axios.post(url, payload);
-    return response.data as Job;
+    const response = await axios.post<Job>(url, payload);
+    return response.data;
   }
 }

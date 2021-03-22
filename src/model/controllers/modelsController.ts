@@ -4,9 +4,10 @@ import { injectable, inject } from 'tsyringe';
 import { Services } from '../../common/constants';
 import { ILogger } from '../../common/interfaces';
 import { Model } from '../../common/models/model';
+import { Payload } from '../../common/models/payload';
 import { ModelsManager } from '../models/modelsManager';
 
-type CreateModelHandler = RequestHandler<undefined, Model, Model>;
+type CreateModelHandler = RequestHandler<undefined, Model, Payload>;
 
 @injectable()
 export class ModelsController {

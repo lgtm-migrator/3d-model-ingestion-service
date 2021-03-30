@@ -1,21 +1,19 @@
-/* eslint-disable @typescript-eslint/naming-convention */
 import faker from 'faker';
 import { Flow } from '../../src/common/models/flow';
 import { Job } from '../../src/common/models/job';
 import { Metadata } from '../../src/common/models/metadata';
 import { Model } from '../../src/common/models/model';
 
-interface IntegrationMetadata extends Omit<Metadata, 'SourceDateStart' | 'SourceDateEnd'> {
-  SourceDateStart: string;
-  SourceDateEnd: string;
+interface IntegrationMetadata extends Omit<Metadata, 'insertDate' | 'creationDate' | 'validationDate' | 'timeBegin' | 'timeEnd'> {
+  insertDate: string;
+  creationDate: string;
+  validationDate: string;
+  timeBegin: string;
+  timeEnd: string;
 }
 
 export const createUuid = (): string => {
   return faker.random.uuid();
-};
-
-export const createDate = (): Date => {
-  return faker.date.past();
 };
 
 export const createModelPath = (): string => {
@@ -24,30 +22,39 @@ export const createModelPath = (): string => {
 
 export const createMetadata = (): Metadata => {
   return {
-    productId: faker.random.word(),
-    productName: faker.random.word(),
-    geographicArea: faker.random.word(),
-    productVersion: 1,
-    productType: '3DModel',
-    description: faker.random.word(),
-    classification: faker.random.word(),
-    footprint: faker.random.word(),
-    extentLowerLeft: faker.random.word(),
-    extentUpperRight: faker.random.word(),
-    SourceDateStart: createDate(),
-    SourceDateEnd: createDate(),
+    identifier: faker.random.uuid(),
+    typeName: faker.random.word(),
+    schema: faker.random.word(),
+    mdSource: faker.random.word(),
+    xml: faker.random.word(),
+    anytext: faker.random.word(),
+    insertDate: faker.date.past(),
+    creationDate: faker.date.past(),
+    validationDate: faker.date.past(),
+    wktGeometry: faker.random.word(),
+    title: faker.random.word(),
     producerName: 'IDFMU',
-    SRS: faker.random.word(),
-    SRSOrigin: faker.random.word(),
+    description: faker.random.word(),
+    type: faker.random.word(),
+    classification: faker.random.word(),
+    srs: faker.random.word(),
+    projectName: faker.random.word(),
+    version: faker.random.word(),
+    centroid: faker.random.word(),
+    footprint: faker.random.word(),
+    timeBegin: faker.date.past(),
+    timeEnd: faker.date.past(),
+    sensorType: faker.random.word(),
+    region: faker.random.word(),
     nominalResolution: faker.random.word(),
     accuracyLE90: faker.random.word(),
     horizontalAccuracyCE90: faker.random.word(),
     relativeAccuracyLE90: faker.random.word(),
-    heightRangeFrom: 0,
-    heightRangeTo: 0,
-    sensor: [faker.random.word()],
-    productionMethod: 'Photogrammetric',
-    productionSystem: faker.random.word(),
+    estimatedPrecision: faker.random.word(),
+    measuredPrecision: faker.random.word(),
+    links: faker.random.word(),
+    anytextTsvector: "'" + faker.random.word() + "'",
+    // wkbGeometry: ''
   };
 };
 
@@ -70,7 +77,14 @@ export const createFakeModel = (): Model => {
   return { modelId: createUuid(), jobId: createUuid(), flowId: createUuid(), modelPath: createModelPath(), metadata: createMetadata() };
 };
 
-export const convertToISOTimestamp = (metadata: Metadata): IntegrationMetadata => {
-  const { SourceDateStart, SourceDateEnd, ...rest } = metadata;
-  return { ...rest, SourceDateStart: SourceDateStart.toISOString(), SourceDateEnd: SourceDateEnd.toISOString() };
+export const convertTimestampToISOString = (metadata: Metadata): IntegrationMetadata => {
+  const { insertDate, creationDate, validationDate, timeBegin, timeEnd, ...rest } = metadata;
+  return {
+    ...rest,
+    insertDate: insertDate.toISOString(),
+    creationDate: creationDate ? creationDate.toISOString() : '',
+    validationDate: validationDate ? validationDate.toISOString() : '',
+    timeBegin: timeBegin ? timeBegin.toISOString() : '',
+    timeEnd: timeEnd ? timeEnd.toISOString() : '',
+  };
 };

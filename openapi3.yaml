@@ -86,82 +86,99 @@ components:
           $ref: '#/components/schemas/metadata'
     metadata:
       type: object
-      description: 3d tiles metadata
+      description: 3d tiles metadata record
       required:
-        - productId
-        - productName
-        - geographicArea
-        - productVersion
-        - productType
-        - extentLowerLeft
-        - extentUpperRight
-        - SourceDateStart
-        - SourceDateEnd
-        - producerName
-        - SRS
-        - accuracyLE90
-        - horizontalAccuracyCE90
-        - relativeAccuracyLE90
-        - sensor
-        - productionSystem
+        - identifier
+        - typeName
+        - schema
+        - mdSource
+        - xml
+        - anytext
+        - insertDate
       properties:
-        productId:
+        identifier:
           type: string
           description: Product's unique identifier
-        productName:
+        typeName:
           type: string
           description: Product name
-        geographicArea:
+        schema:
           type: string
-          description: Emergence geographic area name
-        productVersion:
-          type: number
-          description: Product version
-          default: 1
-        productType:
+          description: Schema
+        mdSource:
           type: string
-          description: Product type
-          enum:
-            - 3DModel
-          default: 3DModel
-        description:
+          description: MD source
+        xml:
           type: string
-          description: Product description
-        classification:
+          description: XML
+        anytext:
           type: string
-          description: Product classification
-        footprint:
+          description: Anytext
+        insertDate:
           type: string
-          description: Geographical delineation of the product
-        extentLowerLeft:
-          type: string
-          description: Bottom left point of a blocking rectangle
-        extentUpperRight:
-          type: string
-          description: Top right point of a blocking rectangle
-        SourceDateStart:
-          type: string
-          description: Date of oldest source material
           format: date-time
-        SourceDateEnd:
+          description: Insertion date
+        creationDate:
           type: string
-          description: Date of latest source material
           format: date-time
+          description: Creation date
+        validationDate:
+          type: string
+          format: date-time
+          description: Validation date
+        wktGeometry:
+          type: string
+          description: Well-Known-Text geometry
+        title:
+          type: string
+          description: Title
         producerName:
           type: string
           description: The organization that produced/supplied the product
           enum:
             - IDFMU
           default: IDFMU
-        SRS:
+        description:
+          type: string
+          description: Description
+        type:
+          type: string
+          description: Type
+        classification:
+          type: string
+          description: Product classification
+        srs:
           type: string
           description: The product reference system, including a vertical data
-        SRSOrigin:
+        projectName:
           type: string
-          description: Axis system center in which the coordinate is displayed
+          description: Project name
+        version:
+          type: string
+          description: Version
+        centroid:
+          type: string
+          description: Centroid
+        footprint:
+          type: string
+          description: Footprint
+        timeBegin:
+          type: string
+          format: date-time
+          description: Begining time
+        timeEnd:
+          type: string
+          format: date-time
+          description: Ending time
+        sensorType:
+          type: string
+          description: The sensor used as the source of the product
+        region:
+          type: string
+          description: Region
         nominalResolution:
           type: string
-          description: Number of points per unit of area
+          description: Nominal resolution
         accuracyLE90:
           type: string
           description: LE90 of the height values
@@ -171,21 +188,18 @@ components:
         relativeAccuracyLE90:
           type: string
           description: LE90 of distance measurement
-        heightRangeFrom:
-          type: number
-          description: The minimum height
-        heightRangeTo:
-          type: number
-          description: The maximum height
-        sensor:
-          type: array
-          items:
-            type: string
-          description: The sensor used as the source of the product (possibly more than one)
-        productionMethod:
+        estimatedPrecision:
           type: string
-          description: Method of extracting altitude data
-          default: Photogrammetric
-        productionSystem:
+          description: Estimated precision
+        measuredPrecision:
           type: string
-          description: Production system
+          description: Measured precision
+        links:
+          type: string
+          description: Links
+        anytextTsvector:
+          type: string
+          description: Anytext tsvector
+        wkbGeometry:
+          type: string
+          description: WKB geometry

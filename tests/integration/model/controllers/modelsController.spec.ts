@@ -1,7 +1,7 @@
 import httpStatusCodes from 'http-status-codes';
 import mockAxios from 'jest-mock-axios';
 import { container } from 'tsyringe';
-import { convertToISOTimestamp, createMetadata, createModelPath } from '../../../helpers/helpers';
+import { convertTimestampToISOString, createMetadata, createModelPath } from '../../../helpers/helpers';
 import { registerTestValues } from '../../testContainerConfig';
 import * as requestSender from './helpers/requestSender';
 
@@ -19,7 +19,6 @@ describe('ModelsController', function () {
     describe('Happy Path 🙂', function () {
       it('should return 201 status code and the added model', async function () {
         const validRequest = { modelPath: createModelPath(), metadata: createMetadata() };
-        const integrationMetadata = convertToISOTimestamp(validRequest.metadata);
         const model = { ...validRequest };
         mockAxios.post.mockResolvedValue({ data: model });
 
@@ -27,7 +26,7 @@ describe('ModelsController', function () {
 
         expect(response.status).toBe(httpStatusCodes.CREATED);
         expect(response.body).toHaveProperty('modelPath', validRequest.modelPath);
-        expect(response.body).toHaveProperty('metadata', integrationMetadata);
+        expect(response.body).toHaveProperty('metadata', convertTimestampToISOString(validRequest.metadata));
       });
     });
 

@@ -1,100 +1,134 @@
-/* eslint-disable @typescript-eslint/naming-convention */
-
 export interface Metadata {
   /**
    * Product's unique identifier
    */
-  productId: string;
+  identifier: string;
   /**
    * Product name
    */
-  productName: string;
+  typeName: string;
   /**
-   * Emergence geographic area name
+   * Schema
    */
-  geographicArea: string;
+  schema: string;
   /**
-   * Product version
+   * MD source
    */
-  productVersion: number; // 1
+  mdSource: string;
   /**
-   * Product type
+   * XML
    */
-  productType: string; // 3DModel
+  xml: string;
   /**
-   * Product description
+   * Anytext
+   */
+  anytext: string;
+  /**
+   * Record insertion date
+   */
+  insertDate: Date;
+  /**
+   * Creation date
+   */
+  creationDate?: Date;
+  /**
+   * Validation date
+   */
+  validationDate?: Date;
+  /**
+   * Well-Known-Text geometry
+   */
+  wktGeometry?: string;
+  /**
+   * Title
+   */
+  title?: string;
+  /**
+   * The organization that produced/supplied the product
+   */
+  producerName?: string; // IDFMU
+  /**
+   * Description
    */
   description?: string;
+  /**
+   * Type
+   */
+  type?: string;
   /**
    * Product classification
    */
   classification?: string;
   /**
-   * Geographical delineation of the product
+   * The product reference system, including a vertical data
+   */
+  srs?: string;
+  /**
+   * Project name
+   */
+  projectName?: string;
+  /**
+   * Version
+   */
+  version?: string;
+  /**
+   * Centroid
+   */
+  centroid?: string;
+  /**
+   * Footprint
    */
   footprint?: string;
   /**
-   * Bottom left point of a blocking rectangle
+   * Begining time
    */
-  extentLowerLeft: string;
+  timeBegin?: Date;
   /**
-   * Top right point of a blocking rectangle
+   * Ending time
    */
-  extentUpperRight: string;
+  timeEnd?: Date;
   /**
-   * Date of oldest source material
+   * The sensor used as the source of the product
    */
-  SourceDateStart: Date;
+  sensorType?: string;
   /**
-   * Date of latest source material
+   * Region
    */
-  SourceDateEnd: Date;
+  region?: string;
   /**
-   * The organization that produced/supplied the product
-   */
-  producerName: string; // IDFMU
-  /**
-   * The product reference system, including a vertical data
-   */
-  SRS: string;
-  /**
-   * Axis system center in which the coordinate is displayed
-   */
-  SRSOrigin?: string;
-  /**
-   * Number of points per unit of area
+   * Nominal resolution
    */
   nominalResolution?: string;
   /**
    * LE90 of the height values
    */
-  accuracyLE90: string;
+  accuracyLE90?: string;
   /**
    * CE90 of location of elevation points
    */
-  horizontalAccuracyCE90: string;
+  horizontalAccuracyCE90?: string;
   /**
    * LE90 of distance measurement
    */
-  relativeAccuracyLE90: string;
+  relativeAccuracyLE90?: string;
   /**
-   * The minimum height
+   * Estimated precision
    */
-  heightRangeFrom?: number;
+  estimatedPrecision?: string;
   /**
-   * The maximum height
+   * Measured precision
    */
-  heightRangeTo?: number;
+  measuredPrecision?: string;
   /**
-   * The sensor used as the source of the product (possibly more than one)
+   * Links
    */
-  sensor: string[];
+  links?: string;
   /**
-   * Method of extracting altitude data
+   * Anytext tsvector
    */
-  productionMethod?: string; // Photogrammetric
+  anytextTsvector?: string;
   /**
-   * Production system
+   * WKB geometry
    */
-  productionSystem: string;
+  wkbGeometry?: string;
 }

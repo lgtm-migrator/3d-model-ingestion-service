@@ -1,1 +1,4 @@
-{}
+{
+  "jobUrl": "http://localhost:8081/jobs",
+  "flowUrl": "http://localhost:8083/flows"
+}

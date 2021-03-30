@@ -1,0 +1,26 @@
+import { inject, injectable } from 'tsyringe';
+import { v4 as uuid } from 'uuid';
+import { FlowsManager } from '../../flow/models/flowsManager';
+import { JobsManager } from '../../job/models/jobsManager';
+import { Services } from '../../common/constants';
+import { ILogger } from '../../common/interfaces';
+import { Flow } from '../../common/models/flow';
+import { Job } from '../../common/models/job';
+import { Model } from '../../common/models/model';
+import { Payload } from '../../common/models/payload';
+
+@injectable()
+export class ModelsManager {
+  public constructor(
+    @inject(Services.LOGGER) private readonly logger: ILogger,
+    private readonly jobs: JobsManager,
+    private readonly flows: FlowsManager
+  ) {}
+
+  public async createModel(payload: Payload): Promise<Model> {
+    this.logger.log('info', `*** Create Model ***`);
+    const createdJob: Job = await this.jobs.createJob(payload);
+    const createdFlow: Flow = await this.flows.createFlow({ ...payload, jobId: createdJob.jobId });
+    return { ...payload, modelId: uuid(), jobId: createdJob.jobId, flowId: createdFlow.flowId };
+  }
+}

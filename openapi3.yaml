@@ -197,9 +197,3 @@ components:
         links:
           type: string
           description: Links
-        anytextTsvector:
-          type: string
-          description: Anytext tsvector
-        wkbGeometry:
-          type: string
-          description: WKB geometry

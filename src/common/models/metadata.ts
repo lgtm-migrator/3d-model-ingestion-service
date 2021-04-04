@@ -123,12 +123,4 @@ export interface Metadata {
    * Links
    */
   links?: string;
-  /**
-   * Anytext tsvector
-   */
-  anytextTsvector?: string;
-  /**
-   * WKB geometry
-   */
-  wkbGeometry?: string;
 }

@@ -53,8 +53,6 @@ export const createMetadata = (): Metadata => {
     estimatedPrecision: faker.random.word(),
     measuredPrecision: faker.random.word(),
     links: faker.random.word(),
-    anytextTsvector: "'" + faker.random.word() + "'",
-    // wkbGeometry: ''
   };
 };
 

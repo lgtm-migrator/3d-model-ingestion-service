@@ -1,0 +1,14 @@
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ .Release.Name }}-service
+  labels: 
+    test: myTestLabel
+spec:
+  selector:
+    podName: 3d-model-ingestion-pod
+  ports:
+  - protocol: TCP
+    port: 8080
+    targetPort: {{ .Values.port }}

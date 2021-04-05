@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-deployment
+  labels:
+    test: myTestLabel
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      podName: 3d-model-ingestion-pod 
+  template:
+    metadata:
+      labels:
+        podName: 3d-model-ingestion-pod
+    spec:
+      containers:
+      - name: 3d-model-ingestion
+        env:
+        - name: SERVER_PORT
+          value: {{ .Values.port | quote }}
+        image: mapcolonies/3d-model-ingestion-service:latest
+        imagePullPolicy: Never
+        ports:
+        - containerPort: {{ .Values.port }}

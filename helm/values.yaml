@@ -1,0 +1,4 @@
+
+# image: mapcolonies/3d-model-ingestion-service:latest
+port: 8080
+

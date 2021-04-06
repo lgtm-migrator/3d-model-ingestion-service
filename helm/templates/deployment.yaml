@@ -20,6 +20,6 @@ spec:
         - name: SERVER_PORT
           value: {{ .Values.ingestionService.port | quote }}
         image: {{ .Values.ingestionService.image }}
-        imagePullPolicy: Never
+        imagePullPolicy: IfNotPresent
         ports:
         - containerPort: {{ .Values.ingestionService.port }}

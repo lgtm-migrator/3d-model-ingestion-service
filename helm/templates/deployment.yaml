@@ -19,6 +19,10 @@ spec:
         env:
         - name: SERVER_PORT
           value: {{ .Values.ingestionService.port | quote }}
+        - name: JOB_SERVICE_URL
+          value: {{ .Values.ingestionService.jobServiceUrl | quote }}
+        - name: FLOW_SERVICE_URL
+          value: {{ .Values.ingestionService.flowServiceUrl | quote }}
         image: {{ .Values.ingestionService.image }}
         imagePullPolicy: IfNotPresent
         ports:

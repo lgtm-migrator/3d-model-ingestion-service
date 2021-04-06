@@ -6,6 +6,9 @@ ingestionService:
   # Name of the image tu pull from registry
   image: mapcolonies/3d-model-ingestion-service:latest
 
+  jobServiceUrl: http://localhost:8081/jobs
+  flowServiceUrl: http://localhost:8082/flows
+
 ingress:
   enabled: true
 

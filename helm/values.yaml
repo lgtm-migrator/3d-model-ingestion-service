@@ -1,4 +1,13 @@
 
-# image: mapcolonies/3d-model-ingestion-service:latest
-port: 8080
+ingestionService:
+  # The port on which the service should listen
+  port: 8080
 
+  # Name of the image tu pull from registry
+  image: mapcolonies/3d-model-ingestion-service:latest
+
+ingress:
+  enabled: true
+
+route:
+  enabled: false

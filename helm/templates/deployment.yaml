@@ -18,8 +18,8 @@ spec:
       - name: 3d-model-ingestion
         env:
         - name: SERVER_PORT
-          value: {{ .Values.port | quote }}
-        image: mapcolonies/3d-model-ingestion-service:latest
+          value: {{ .Values.ingestionService.port | quote }}
+        image: {{ .Values.ingestionService.image }}
         imagePullPolicy: Never
         ports:
-        - containerPort: {{ .Values.port }}
+        - containerPort: {{ .Values.ingestionService.port }}

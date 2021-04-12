@@ -1,20 +1,50 @@
-import { Payload } from './payload';
-
-export interface Job extends Payload {
+export interface Job {
   /**
    * Ingestion job unique identifier
    */
-  jobId: string;
+  id: string;
+  /**
+   * Model unique identifier
+   */
+  resourceId: string;
+  /**
+   * Model version
+   */
+  version: string;
+  /**
+   * Model type
+   */
+  type: string;
+  /**
+   * Model description
+   */
+  description?: string;
+  /**
+   * Job parameters
+   */
+  parameters: Record<string, never>;
+  /**
+   * Record creation date
+   */
+  creationTime?: Date;
+  /**
+   * Record last updated date
+   */
+  updateTime?: Date;
   /**
    * Ingestion flow status
    */
   status: string;
   /**
-   * Record creation date
+   * Ingestion flow progress
    */
-  created: Date;
+  percentage: number;
   /**
-   * Record last updated date
+   * Reason of failure
    */
-  updated: Date;
+  reason?: string;
+  /**
+   * Sub jobs
+   */
+  tasks?: Record<string, never>[];
 }

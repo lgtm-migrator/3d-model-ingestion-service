@@ -1,7 +1,7 @@
 import mockAxios from 'jest-mock-axios';
 import config from 'config';
 import { JobsManager } from '../../../../src/job/models/jobsManager';
-import { createFakeJob } from '../../../helpers/helpers';
+import { createFakeJobPayload, createFakeJob } from '../../../helpers/helpers';
 
 describe('JobsManager', () => {
   let jobsManager: JobsManager;
@@ -15,18 +15,19 @@ describe('JobsManager', () => {
 
   describe('#createJob', () => {
     it('resolves without errors', async () => {
-      const data = createFakeJob();
+      const data = createFakeJobPayload();
       const url = config.get<string>('jobUrl');
-      mockAxios.post.mockResolvedValue({ data });
+      const job = createFakeJob(data);
+      mockAxios.post.mockResolvedValue({ data: job });
 
       const created = await jobsManager.createJob(data);
 
       expect(mockAxios.post).toHaveBeenCalledWith(url, data);
-      expect(created).toMatchObject(data);
+      expect(created).toMatchObject(job);
     });
 
     it('rejects if service is not available', async () => {
-      const data = createFakeJob();
+      const data = createFakeJobPayload();
       mockAxios.post.mockRejectedValue(new Error('Job service is not available'));
 
       const createPromise = jobsManager.createJob(data);

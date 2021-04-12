@@ -1,6 +1,7 @@
 import faker from 'faker';
 import { Flow } from '../../src/common/models/flow';
 import { Job } from '../../src/common/models/job';
+import { JobPayload } from '../../src/common/models/jobPayload';
 import { Metadata } from '../../src/common/models/metadata';
 import { Model } from '../../src/common/models/model';
 
@@ -56,14 +57,26 @@ export const createMetadata = (): Metadata => {
   };
 };
 
-export const createFakeJob = (): Job => {
+export const createFakeJobPayload = (): JobPayload => {
   return {
-    jobId: createUuid(),
-    modelPath: createModelPath(),
-    metadata: createMetadata(),
+    resourceId: createUuid(),
+    parameters: {
+      modelPath: createModelPath(),
+      metadata: createMetadata(),
+    },
+  };
+};
+
+export const createFakeJob = (payload: JobPayload): Job => {
+  return {
+    id: createUuid(),
+    resourceId: payload.resourceId,
+    parameters: payload.parameters,
     status: 'Pending',
-    created: new Date(),
-    updated: new Date(),
+    version: '1',
+    type: '3D',
+    description: '3D Model Ingestion',
+    percentage: 0,
   };
 };
 

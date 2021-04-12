@@ -1,3 +1,5 @@
+import { Payload } from './payload';
+
 export interface Job {
   /**
    * Ingestion job unique identifier
@@ -22,7 +24,7 @@ export interface Job {
   /**
    * Job parameters
    */
-  parameters: Record<string, never>;
+  parameters: Payload;
   /**
    * Record creation date
    */

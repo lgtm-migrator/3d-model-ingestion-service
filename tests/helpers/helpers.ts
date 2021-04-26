@@ -24,7 +24,7 @@ export const createModelPath = (): string => {
 export const createMetadata = (): Metadata => {
   return {
     identifier: faker.random.uuid(),
-    typeName: faker.random.word(),
+    typename: faker.random.word(),
     schema: faker.random.word(),
     mdSource: faker.random.word(),
     xml: faker.random.word(),
@@ -53,7 +53,10 @@ export const createMetadata = (): Metadata => {
     relativeAccuracyLE90: faker.random.word(),
     estimatedPrecision: faker.random.word(),
     measuredPrecision: faker.random.word(),
-    links: faker.random.word(),
+    links: [
+      { protocol: '3DTILES', url: 'dragon_high.b3dm' },
+      { protocol: '3DTILES', url: 'city/tileset.json' },
+    ],
   };
 };
 

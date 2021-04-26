@@ -1,14 +1,14 @@
 export interface Metadata {
   /**
-   * Product's unique identifier
+   * Unique identifier
    */
   identifier: string;
   /**
-   * Product name
+   * Typename for the metadata; typically the value of the root element tag (e.g. csw:Record, gmd:MD_Metadata)
    */
-  typeName: string;
+  typename: string;
   /**
-   * Schema
+   * Schema for the metadata; typically the target namespace (e.g. http://www.opengis.net/cat/csw/2.0.2, http://www.isotc211.org/2005/gmd)
    */
   schema: string;
   /**
@@ -16,15 +16,15 @@ export interface Metadata {
    */
   mdSource: string;
   /**
-   * XML
+   * Full XML representation
    */
   xml: string;
   /**
-   * Anytext
+   * Bag of XML element text values, used for full text search
    */
   anytext: string;
   /**
-   * Record insertion date
+   * Date of insertion
    */
   insertDate: Date;
   /**
@@ -36,7 +36,7 @@ export interface Metadata {
    */
   validationDate?: Date;
   /**
-   * Well-Known-Text geometry
+   * Well-Known-Text markup language for representing vector geometry objects
    */
   wktGeometry?: string;
   /**
@@ -120,7 +120,14 @@ export interface Metadata {
    */
   measuredPrecision?: string;
   /**
-   * Links
+   * Structure of links
    */
-  links?: string;
+  links?: ILink[];
+}
+
+export interface ILink {
+  name?: string;
+  description?: string;
+  protocol: string;
+  url: string;
 }

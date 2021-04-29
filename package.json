@@ -1,6 +1,6 @@
 {
   "name": "3d-model-ingestion-service",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "A restful API for creating a new 3d model ingestion flow",
   "main": "./src/index.ts",
   "scripts": {

@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.1.3](https://github.com/MapColonies/3d-model-ingestion-service/compare/v1.1.2...v1.1.3) (2021-05-02)
+
+
+### Bug Fixes
+
+* add tasks array to jobsPayload due to bug in jobService ([9607d6d](https://github.com/MapColonies/3d-model-ingestion-service/commit/9607d6d7f44b6738343984d857768bd292a860e4))
+
 ### [1.1.2](https://github.com/MapColonies/3d-model-ingestion-service/compare/v1.1.1...v1.1.2) (2021-04-29)
 
 

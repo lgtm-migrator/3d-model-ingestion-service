@@ -29,4 +29,6 @@ export interface JobPayload {
    * Ingestion flow progress
    */
   percentage?: number;
+
+  tasks?: string[];
 }

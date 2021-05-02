@@ -15,6 +15,7 @@ export class JobsManager {
     payload.type = '3D';
     payload.description = '3D Model Ingestion';
     payload.percentage = 0;
+    payload.tasks = [];
     const url = this.config.get<string>('jobUrl');
     const response = await axios.post<Job>(url, payload);
     return response.data;

@@ -84,21 +84,6 @@ components:
           description: Model files location path
         metadata:
           $ref: '#/components/schemas/metadata'
-    link:
-      type: object
-      description: Structure of link
-      required:
-        - protocol
-        - url
-      properties:
-        name:
-          type: string
-        description:
-          type: string
-        protocol:
-          type: string
-        url:
-          type: string
     metadata:
       type: object
       description: 3d tiles metadata payload
@@ -209,8 +194,3 @@ components:
         measuredPrecision:
           type: string
           description: Measured precision
-        links:
-          type: array
-          items:
-            $ref: '#/components/schemas/link'
-          description: Structure of links

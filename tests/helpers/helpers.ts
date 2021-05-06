@@ -52,11 +52,7 @@ export const createMetadata = (): Metadata => {
     horizontalAccuracyCE90: faker.random.word(),
     relativeAccuracyLE90: faker.random.word(),
     estimatedPrecision: faker.random.word(),
-    measuredPrecision: faker.random.word(),
-    links: [
-      { protocol: '3DTILES', url: 'dragon_high.b3dm' },
-      { protocol: '3DTILES', url: 'city/tileset.json' },
-    ],
+    measuredPrecision: faker.random.word()
   };
 };
 

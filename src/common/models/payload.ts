@@ -6,6 +6,10 @@ export interface Payload {
    */
   modelPath: string;
   /**
+   * Model tileset filename
+   */
+  tilesetFilename: string;
+  /**
    * Metadata
    */
   metadata: Metadata;

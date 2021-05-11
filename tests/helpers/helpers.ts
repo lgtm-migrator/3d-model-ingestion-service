@@ -21,6 +21,10 @@ export const createModelPath = (): string => {
   return '/tmp/tilesets/TilesetWithDiscreteLOD';
 };
 
+export const createTilesetFilename = (): string => {
+  return 'tileset.json';
+};
+
 export const createMetadata = (): Metadata => {
   return {
     identifier: faker.random.uuid(),
@@ -53,10 +57,6 @@ export const createMetadata = (): Metadata => {
     relativeAccuracyLE90: faker.random.word(),
     estimatedPrecision: faker.random.word(),
     measuredPrecision: faker.random.word(),
-    links: [
-      { protocol: '3DTILES', url: 'dragon_high.b3dm' },
-      { protocol: '3DTILES', url: 'city/tileset.json' },
-    ],
   };
 };
 
@@ -65,6 +65,7 @@ export const createFakeJobPayload = (): JobPayload => {
     resourceId: createUuid(),
     parameters: {
       modelPath: createModelPath(),
+      tilesetFilename: createTilesetFilename(),
       metadata: createMetadata(),
     },
   };
@@ -84,11 +85,24 @@ export const createFakeJob = (payload: JobPayload): Job => {
 };
 
 export const createFakeFlow = (): Flow => {
-  return { flowId: createUuid(), jobId: createUuid(), modelPath: createModelPath(), metadata: createMetadata() };
+  return {
+    flowId: createUuid(),
+    jobId: createUuid(),
+    modelPath: createModelPath(),
+    tilesetFilename: createTilesetFilename(),
+    metadata: createMetadata(),
+  };
 };
 
 export const createFakeModel = (): Model => {
-  return { modelId: createUuid(), jobId: createUuid(), flowId: createUuid(), modelPath: createModelPath(), metadata: createMetadata() };
+  return {
+    modelId: createUuid(),
+    jobId: createUuid(),
+    flowId: createUuid(),
+    modelPath: createModelPath(),
+    tilesetFilename: createTilesetFilename(),
+    metadata: createMetadata(),
+  };
 };
 
 export const convertTimestampToISOString = (metadata: Metadata): IntegrationMetadata => {

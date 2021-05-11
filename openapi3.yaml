@@ -53,11 +53,15 @@ components:
       description: 3d model payload
       required:
         - modelPath
+        - tilesetFilename
         - metadata
       properties:
         modelPath:
           type: string
           description: Model files location path
+        tilesetFilename:
+          type: string
+          description: Model tileset filename
         metadata:
           $ref: '#/components/schemas/metadata'
     model:
@@ -65,6 +69,7 @@ components:
       description: 3d model metadata for 3d model upload
       required:
         - modelPath
+        - tilesetFilename
         - metadata
       properties:
         modelId:
@@ -82,23 +87,11 @@ components:
         modelPath:
           type: string
           description: Model files location path
+        tilesetFilename:
+          type: string
+          description: Model tileset filename
         metadata:
           $ref: '#/components/schemas/metadata'
-    link:
-      type: object
-      description: Structure of link
-      required:
-        - protocol
-        - url
-      properties:
-        name:
-          type: string
-        description:
-          type: string
-        protocol:
-          type: string
-        url:
-          type: string
     metadata:
       type: object
       description: 3d tiles metadata payload
@@ -209,8 +202,3 @@ components:
         measuredPrecision:
           type: string
           description: Measured precision
-        links:
-          type: array
-          items:
-            $ref: '#/components/schemas/link'
-          description: Structure of links

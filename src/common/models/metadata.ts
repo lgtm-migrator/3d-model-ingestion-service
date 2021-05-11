@@ -119,15 +119,4 @@ export interface Metadata {
    * Measured precision
    */
   measuredPrecision?: string;
-  /**
-   * Structure of links
-   */
-  links?: ILink[];
-}
-
-export interface ILink {
-  name?: string;
-  description?: string;
-  protocol: string;
-  url: string;
 }

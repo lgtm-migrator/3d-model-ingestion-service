@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.2.0](https://github.com/MapColonies/3d-model-ingestion-service/compare/v1.1.3...v1.2.0) (2021-05-13)
+
+
+### Features
+
+* **model:** add model tileset filename ([528a864](https://github.com/MapColonies/3d-model-ingestion-service/commit/528a864802e19c86023d1ad2e1505f03052fe2a8))
+
 ### [1.1.3](https://github.com/MapColonies/3d-model-ingestion-service/compare/v1.1.2...v1.1.3) (2021-05-02)
 
 

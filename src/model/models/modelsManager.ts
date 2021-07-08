@@ -21,7 +21,12 @@ export class ModelsManager {
     this.logger.log('info', `*** Create Model ***`);
     const modelId = uuid();
     const createdJob: Job = await this.jobs.createJob({ resourceId: modelId, parameters: payload });
-    const createdFlow: Flow = await this.flows.createFlow({ ...payload, jobId: createdJob.id });
-    return { ...createdFlow, modelId };
+    try{
+      const createdFlow: Flow = await this.flows.createFlow({ ...payload, jobId: createdJob.id });
+      return { ...createdFlow, modelId };
+    } catch (error) {
+      await this.jobs.updateJobStatus(createdJob.id, "Failed");
+      throw error;
+    }
   }
 }

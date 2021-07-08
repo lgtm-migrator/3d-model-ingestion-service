@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [1.2.1](https://github.com/MapColonies/3d-model-ingestion-service/compare/v1.2.0...v1.2.1) (2021-07-08)
+
+
+### Bug Fixes
+
+* set job status as failed when NIFI is unreachable ([85cda91](https://github.com/MapColonies/3d-model-ingestion-service/commit/85cda91798bc320a4c5df9a7d7cbc94e3809dfb2))
+
 ## [1.2.0](https://github.com/MapColonies/3d-model-ingestion-service/compare/v1.1.3...v1.2.0) (2021-05-13)
 
 

@@ -56,6 +56,5 @@ export class ServerBuilder {
   private registerPostRoutesMiddleware(): void {
     this.serverInstance.options('*', cors);
     this.serverInstance.use(getErrorHandlerMiddleware((message) => this.logger.log('error', message)));
-
   }
 }

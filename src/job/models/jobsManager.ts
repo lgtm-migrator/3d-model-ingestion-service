@@ -4,6 +4,7 @@ import { Services } from '../../common/constants';
 import { IConfig, ILogger } from '../../common/interfaces';
 import { Job } from '../../common/models/job';
 import { JobPayload } from '../../common/models/jobPayload';
+import { JobUpdatePayload } from '../../common/models/jobUpdatePayload';
 
 @injectable()
 export class JobsManager {
@@ -21,11 +22,9 @@ export class JobsManager {
     return response.data;
   }
 
-  public async updateJobStatus(jobId: string, status: string): Promise<number> {
+  public async updateJobStatus(jobId: string, payload: JobUpdatePayload): Promise<void> {
     const url = this.config.get<string>('jobUrl');
-    const updateUrl = `${url}/${jobId}`
-    const response = await axios.put(updateUrl, { status });
-    return response.status;
+    const updateUrl = `${url}/${jobId}`;
+    await axios.put(updateUrl, payload);
   }
-
 }

@@ -9,7 +9,7 @@
     "level": "info"
   },
   "server": {
-    "port": "8082"
+    "port": "8080"
   },
   "jobUrl": "http://localhost:8081/jobs",
   "flowUrl": "http://localhost:8083/flows"

@@ -7,6 +7,7 @@ describe('ModelsManager', () => {
 
   const jobsManagerMock = {
     createJob: jest.fn(),
+    updateJobStatus: jest.fn(),
   };
   const flowsManagerMock = {
     createFlow: jest.fn(),

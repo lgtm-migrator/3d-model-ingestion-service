@@ -21,11 +21,11 @@ export class ModelsManager {
     this.logger.log('info', `*** Create Model ***`);
     const modelId = uuid();
     const createdJob: Job = await this.jobs.createJob({ resourceId: modelId, parameters: payload });
-    try{
+    try {
       const createdFlow: Flow = await this.flows.createFlow({ ...payload, jobId: createdJob.id });
       return { ...createdFlow, modelId };
     } catch (error) {
-      await this.jobs.updateJobStatus(createdJob.id, "Failed");
+      await this.jobs.updateJobStatus(createdJob.id, { status: 'Failed', reason: 'Connection error to Nifi' });
       throw error;
     }
   }

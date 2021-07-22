@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.3.0](https://github.com/MapColonies/3d-model-ingestion-service/compare/v1.2.1...v1.3.0) (2021-07-22)
+
+
+### Features
+
+* enable cors ([c9c567d](https://github.com/MapColonies/3d-model-ingestion-service/commit/c9c567d4148fb09a1aac5075584d2e8a4de19879))
+
 ### [1.2.1](https://github.com/MapColonies/3d-model-ingestion-service/compare/v1.2.0...v1.2.1) (2021-07-08)
 
 

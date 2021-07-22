@@ -3,7 +3,7 @@
 port: 8080
 
 # Name of the image tu pull from registry
-image: acrarolibotnonprod.azurecr.io/3d-model-ingestion-service:v1.3.0
+image: mapcolonies/3d-model-ingestion-service:v1.3.0
 
 replicaCount: 1
 

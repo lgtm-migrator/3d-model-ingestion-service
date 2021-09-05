@@ -1,122 +1,38 @@
 export interface Metadata {
-  /**
-   * Unique identifier
-   */
-  identifier: string;
-  /**
-   * Typename for the metadata; typically the value of the root element tag (e.g. csw:Record, gmd:MD_Metadata)
-   */
-  typename: string;
-  /**
-   * Schema for the metadata; typically the target namespace (e.g. http://www.opengis.net/cat/csw/2.0.2, http://www.isotc211.org/2005/gmd)
-   */
-  schema: string;
-  /**
-   * MD source
-   */
-  mdSource: string;
-  /**
-   * Full XML representation
-   */
-  xml: string;
-  /**
-   * Bag of XML element text values, used for full text search
-   */
-  anytext: string;
-  /**
-   * Date of insertion
-   */
-  insertDate: Date;
-  /**
-   * Creation date
-   */
-  creationDate?: Date;
-  /**
-   * Validation date
-   */
-  validationDate?: Date;
-  /**
-   * Well-Known-Text markup language for representing vector geometry objects
-   */
-  wktGeometry?: string;
-  /**
-   * Title
-   */
-  title?: string;
-  /**
-   * The organization that produced/supplied the product
-   */
-  producerName?: string; // IDFMU
-  /**
-   * Description
-   */
+  productName: string;
+  productVersion: string;
+  productType: string;
   description?: string;
-  /**
-   * Type
-   */
-  type?: string;
-  /**
-   * Product classification
-   */
-  classification?: string;
-  /**
-   * The product reference system, including a vertical data
-   */
-  srs?: string;
-  /**
-   * Project name
-   */
-  projectName?: string;
-  /**
-   * Version
-   */
-  version?: string;
-  /**
-   * Centroid
-   */
-  centroid?: string;
-  /**
-   * Footprint
-   */
-  footprint?: string;
-  /**
-   * Begining time
-   */
-  timeBegin?: Date;
-  /**
-   * Ending time
-   */
-  timeEnd?: Date;
-  /**
-   * The sensor used as the source of the product
-   */
-  sensorType?: string;
-  /**
-   * Region
-   */
-  region?: string;
-  /**
-   * Nominal resolution
-   */
+  creationDate?: string;
+  sourceStartDate?: string;
+  sourceEndDate?: string;
+  minResolutionMeter?: number;
+  maxResolutionMeter?: number;
+  minResolutionDeg?: number;
+  maxResolutionDeg?: number;
   nominalResolution?: string;
-  /**
-   * LE90 of the height values
-   */
-  accuracyLE90?: string;
-  /**
-   * CE90 of location of elevation points
-   */
-  horizontalAccuracyCE90?: string;
-  /**
-   * LE90 of distance measurement
-   */
-  relativeAccuracyLE90?: string;
-  /**
-   * Estimated precision
-   */
-  estimatedPrecision?: string;
-  /**
-   * Measured precision
-   */
-  measuredPrecision?: string;
+  minAccuracyCE90: number;
+  maxAccuracyCE90: number;
+  accuracyLE90: number;
+  accuracySE90?: number;
+  relativeAccuracyLE90?: number;
+  visualAccuracy?: number;
+  sensorType: string;
+  footprint?: string;
+  heightRangeFrom?: number;
+  heightRangeTo?: number;
+  srsId: bigint;
+  srsName: string;
+  srsOrigin?: string; // TODO: create struct representing it as a point
+  region: string;
+  classification: string;
+  compartmentalization?: string;
+  productionSystem: string;
+  productionSystemVer: string;
+  producerName: string;
+  productionMethod?: string;
+  minFlightAlt?: number;
+  maxFlightAlt?: number;
+  geographicArea?: string;
+  boundingBox: string;
 }

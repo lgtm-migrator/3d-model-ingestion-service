@@ -1,7 +1,7 @@
 import httpStatusCodes from 'http-status-codes';
 import mockAxios from 'jest-mock-axios';
 import { container } from 'tsyringe';
-import { convertTimestampToISOString, createMetadata, createModelPath, createTilesetFilename } from '../../../helpers/helpers';
+import { createMetadata, createModelPath, createTilesetFilename } from '../../../helpers/helpers';
 import { registerTestValues } from '../../testContainerConfig';
 import * as requestSender from './helpers/requestSender';
 
@@ -27,7 +27,8 @@ describe('ModelsController', function () {
         expect(response.status).toBe(httpStatusCodes.CREATED);
         expect(response.body).toHaveProperty('modelPath', validRequest.modelPath);
         expect(response.body).toHaveProperty('tilesetFilename', validRequest.tilesetFilename);
-        expect(response.body).toHaveProperty('metadata', convertTimestampToISOString(validRequest.metadata));
+        expect(response.body).toHaveProperty('metadata', validRequest.metadata);
+        //expect(response.body).toHaveProperty('metadata', convertTimestampToISOString(validRequest.metadata));
       });
     });
 

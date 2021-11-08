@@ -57,9 +57,11 @@ components:
         modelPath:
           type: string
           description: Model files location path
+          example: '/home/libotadmin/NewWork'
         tilesetFilename:
           type: string
           description: Model tileset filename
+          example: 'tileset.json'
         metadata:
           $ref: '#/components/schemas/metadata'
     model:
@@ -95,30 +97,35 @@ components:
       description: 3d tiles metadata payload
       required:
         - productName
-        - productVersion
+        # - productVersion
         - productType
         - sourceDateStart
         - sourceDateEnd
         - maxAccuracyCE90
         - absoluteAccuracyLEP90
         - sensors
-        - srsId
+        - footprint
         - srsName
         - region
         - classification
         - productionSystem
         - productionSystemVer
         - producerName
-        - productBoundingBox
       properties:
+        productId:
+          type: string
+          nullable: true
+          default: null
+          description: ID of product
         productName:
           type: string
           maxLength: 50
           description: Name of product
         productVersion:
-          type: string
-          maxLength: 10
+          type: integer
+          example: 1
           description: Number of version
+          readOnly: true
         productType:
           type: string
           description: Type of product (3DPhotoRealistic)
@@ -191,7 +198,7 @@ components:
           type: string
           description: All sensors that took part as a source to the product
         footprint:
-          type: string
+          $ref: '#/components/schemas/GeojsonGeometryPolygon'
           description: Geographic demarkatetion of the product
         heightRangeFrom:
           type: number
@@ -218,7 +225,7 @@ components:
           description: States
         classification:
           type: string
-          example: '5'
+          example: '"5"'
           pattern: '^[0-9]$'
           description: Classification of the product
         compartmentalization:
@@ -250,6 +257,28 @@ components:
           description: Area inside the region
         productBoundingBox:
           type: string
-          example: 0,0,50,50
+          readOnly: true
           pattern: '^([-+]?(0|[1-9]\d*)(\.\d+)?,){3}[-+]?(0|[1-9]\d*)(\.\d+)?$'
           description: The bounding box of the product
+
+    GeojsonGeometryPolygon:
+      type: object
+      required:
+        - type
+        - coordinates
+      properties:
+        type:
+          type: string
+          enum:
+            - Polygon
+        coordinates:
+          type: array
+          items:
+            type: array
+            minItems: 5
+            items:
+              type: array
+              minItems: 2
+              items:
+                type: number
+      example: '{"type":"Polygon","coordinates":[[[1,2],[3,4],[5,6],[7,8],[1,2]]]}'

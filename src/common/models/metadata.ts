@@ -1,6 +1,9 @@
+import GeoJson from 'geojson';
+
 export interface Metadata {
+  productId: string;
   productName: string;
-  productVersion: string;
+  productVersion: number;
   productType: string;
   description?: string;
   creationDate?: string;
@@ -15,10 +18,10 @@ export interface Metadata {
   relativeAccuracyLEP90?: number;
   visualAccuracy?: number;
   sensors: string;
-  footprint?: string;
+  footprint: GeoJson.Geometry;
   heightRangeFrom?: number;
   heightRangeTo?: number;
-  srsId: number;
+  srsId?: number;
   srsName: string;
   srsOrigin?: string; // TODO: create struct representing it as a point
   region: string;

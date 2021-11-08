@@ -1,20 +1,37 @@
 import RandExp from 'randexp';
 import faker from 'faker';
+import { Geometry } from 'geojson';
 import { Flow } from '../../src/common/models/flow';
 import { Job } from '../../src/common/models/job';
 import { JobPayload } from '../../src/common/models/jobPayload';
 import { Metadata } from '../../src/common/models/metadata';
 import { Model } from '../../src/common/models/model';
 
-const srsOriginHelper = new RandExp('^\\(([-+]?(0|[1-9]\\d*)(\\.\\d+)?;){2}[-+]?(0|[1-9]\\d*)(\\.\\d+)?\\)$').gen();
+const srsOriginHelper = new RandExp('^\\(([-]?(0|[1-9]\\d*)(\\.\\d+)?;){2}[-]?(0|[1-9]\\d*)(\\.\\d+)?\\)$').gen();
 const classificationHelper = new RandExp('^[0-9]$').gen();
-const productBoundingBoxHelper = new RandExp('^([-+]?(0|[1-9]\\d*)(\\.\\d+)?,){3}[-+]?(0|[1-9]\\d*)(\\.\\d+)?$').gen();
+const productBoundingBoxHelper = new RandExp('^([-]?(0|[1-9]\\d*)(\\.\\d+)?,){3}[-]?(0|[1-9]\\d*)(\\.\\d+)?$').gen();
 const listOfRandomWords = ['avi', 'אבי', 'lalalalala', 'וןםפ'];
 const maxResolutionMeter = 8000;
 const maxAbsoluteAccuracyLEP90 = 999;
 const maxAccuracySE90 = 250;
 const maxRelativeAccuracyLEP90 = 100;
 const maxVisualAccuracy = 100;
+const minX = 1;
+const minY = 2;
+const maxX = 3;
+const maxY = 4;
+const exampleGeometry = {
+  type: 'Polygon',
+  coordinates: [
+    [
+      [minX, minY],
+      [maxX, minY],
+      [maxX, maxY],
+      [minX, maxY],
+      [minX, minY],
+    ],
+  ],
+} as Geometry;
 
 // interface IntegrationMetadata extends Omit<Metadata, 'insertDate' | 'creationDate' | 'validationDate' | 'timeBegin' | 'timeEnd'> {
 //   insertDate: string;
@@ -48,8 +65,9 @@ export const createMetadata = (): Metadata => {
     // xml: faker.random.word(),
     // anytext: faker.random.word(),
 
+    productId: Math.floor(Math.random() * listOfRandomWords.length).toString(),
     productName: Math.floor(Math.random() * listOfRandomWords.length).toString(),
-    productVersion: Math.floor(Math.random() * listOfRandomWords.length).toString(),
+    productVersion: faker.random.number(maxResolutionMeter),
     productType: faker.random.word(),
     description: Math.floor(Math.random() * listOfRandomWords.length).toString(),
     creationDate: faker.date.past().toISOString(),
@@ -64,7 +82,7 @@ export const createMetadata = (): Metadata => {
     relativeAccuracyLEP90: faker.random.number(maxRelativeAccuracyLEP90),
     visualAccuracy: faker.random.number(maxVisualAccuracy),
     sensors: faker.random.word(),
-    footprint: faker.random.word(),
+    footprint: exampleGeometry,
     heightRangeFrom: faker.random.number(),
     heightRangeTo: faker.random.number(),
     srsId: faker.random.number(),

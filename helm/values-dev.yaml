@@ -1,19 +1,58 @@
+global:
+  cloudProvider: {}
+  tracing: {}
+  metrics: {}
+  environment: {}
 
-# The port on which the service should listen
-port: 8080
+image: acrarolibotnonprod.azurecr.io/3d-model-ingestion-service:v1-rc-profile
 
-# Name of the image tu pull from registry
-image: acrarolibotnonprod.azurecr.io/ingestion:v1.0.2-rc-profile
-
+enabled: true
+environment: development
+initialDelaySeconds: 60
+# nodePort: 30030
 replicaCount: 1
 
-service:
-  internalPort: 8080
-  externalPort: 8080
+cloudProvider:
+  dockerRegistryUrl: 'acrarolibotnonprod.azurecr.io'
+  flavor: openshift
 
-jobServiceUrl:  https://job-manager-job-qa-job-manager-route-raster.apps.v0h0bdx6.eastus.aroapp.io/jobs
+env:
+  port: 8080
+  targetPort: 8080
+  protocol: TCP
+  logLevel: info
+  logPrettyPrintEnabled: false
+  responseCompressionEnabled: true
+  requestPayloadLimit: 1mb
+  tracing:
+    enabled: false
+    url: http://localhost:55681/v1/trace
+  metrics:
+    enabled: false
+    url: http://localhost:55681/v1/metrics
 
-flowServiceUrl: http://10.8.1.9:8083/flows
+resources:
+  enabled: true
+  value:
+    limits:
+      cpu: 100m
+      memory: 128Mi
+    requests:
+      cpu: 100m
+      memory: 128Mi
+
+# # external
+# dbConfig:
+#   host: 10.8.1.15
+#   username: postgres
+#   password: postgres
+#   database: pycsw-3d-dev
+#   sslAuth:
+#     enabled: false
+#     secretName: secret-name
+#     certFileName: postgresql.crt
+#     keyFileName: postgresql.key
+#     caFileName: root.crt
 
 ingress:
   enabled: false
@@ -23,9 +62,7 @@ ingress:
     nginx.org/mergeable-ingress-type: "minion"
     nginx.org/rewrites: "serviceName={{ printf \"%s-%s\" .Release.Name .Chart.Name | trunc 63 | trimSuffix \"-\" }} rewrite=/"
 
-  path: /3d-model-ingestion-service/
-
-  hosts: ["minikube.local"]
+    path: /3d-model-ingestion-service/
 
 route:
   enabled: true

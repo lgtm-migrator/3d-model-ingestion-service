@@ -19,6 +19,8 @@ export class ModelsController {
       const createdModel = await this.manager.createModel(newModel);
       return res.status(httpStatus.CREATED).json(createdModel);
     } catch (error) {
+      console.log(error);
+      this.logger.log('error', (error as Error).message);
       return next(error);
     }
   };

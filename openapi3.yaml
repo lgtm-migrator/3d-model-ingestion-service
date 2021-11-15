@@ -57,7 +57,7 @@ components:
         modelPath:
           type: string
           description: Model files location path
-          example: '/home/libotadmin/NewWork'
+          example: '/home/libotadmin/NewYork'
         tilesetFilename:
           type: string
           description: Model tileset filename

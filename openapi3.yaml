@@ -133,10 +133,12 @@ components:
         description:
           type: string
           maxLength: 250
+          nullable: true
           description: description and comments
         creationDate: # What should I do? date-time: yyyy-mm-dd and required: dd-mm-yyyy
           type: string
           format: date-time
+          nullable: true
           description: Creation date
         sourceDateStart: # What should I do? date-time: yyyy-mm-dd and required: dd-mm-yyyy
           type: string
@@ -149,6 +151,7 @@ components:
         minResolutionMeter:
           type: number
           format: double
+          nullable: true
           example: 1.1
           minimum: 0.01
           maximum: 8000
@@ -156,6 +159,7 @@ components:
         maxResolutionMeter:
           type: number
           format: double
+          nullable: true
           example: 1.5
           minimum: 0.01
           maximum: 8000
@@ -163,6 +167,7 @@ components:
         nominalResolution:
           type: number
           format: double
+          nullable: true
           example: 5
           minimum: 0
           description: Number of points in one size unit
@@ -181,17 +186,20 @@ components:
           type: number
           format: double
           minimum: 0
+          nullable: true
           maximum: 250
           description: Absolute spherical accuracy
         relativeAccuracyLEP90:
           type: number
           format: double
+          nullable: true
           minimum: 0
           maximum: 100
           description: Relative vertical accuracy
         visualAccuracy:
           type: number
           format: double
+          nullable: true
           minimum: 0
           maximum: 100
           description: Measure of visual quality
@@ -204,20 +212,24 @@ components:
         heightRangeFrom:
           type: number
           format: double
+          nullable: true
           description: Minimum height range of ground
         heightRangeTo:
           type: number
           format: double
+          nullable: true
           description: Maximum height range of ground
         srsId:
           type: integer
           example: 4326
+          nullable: true
           description: ID of srs
         srsName:
           type: string
           description: Name of the srsID
         srsOrigin:
           type: string
+          nullable: true
           example: (30;40;50)
           pattern: '^\(([-]?(0|[1-9]\d*)(\.\d+)?;){2}[-]?(0|[1-9]\d*)(\.\d+)?\)$'
           description: First of axes
@@ -231,6 +243,7 @@ components:
           description: Classification of the product
         compartmentalization:
           type: string
+          nullable: true
           description: compartmentalization of the product
         productionSystem:
           type: string
@@ -244,6 +257,7 @@ components:
           description: The name of the producer (product owner)
         productionMethod:
           type: string
+          nullable: true
           description: Method of the production
         minFlightAlt:
           type: number
@@ -251,10 +265,12 @@ components:
           description: Minimum height of the flight
         maxFlightAlt:
           type: number
+          nullable: true
           format: double
           description: Maximum height of the flight
         geographicArea:
           type: string
+          nullable: true
           description: Area inside the region
         productBoundingBox:
           type: string

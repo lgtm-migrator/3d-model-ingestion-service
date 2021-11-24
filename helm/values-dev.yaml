@@ -11,7 +11,7 @@ service:
   internalPort: 8080
   externalPort: 8080
 
-jobServiceUrl:  https://job-manager-dev-job-manager-route-raster-dev.apps.v0h0bdx6.eastus.aroapp.io/jobs
+jobServiceUrl:  https://job-manager-3d-dev-dev-job-manager-route-3d-dev.apps.v0h0bdx6.eastus.aroapp.io/jobs
 
 flowServiceUrl: http://10.8.1.9:8083/flows
 

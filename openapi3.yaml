@@ -6,8 +6,6 @@ info:
   license:
     name: MIT
     url: https://opensource.org/licenses/MIT
-servers:
-  - url: http://localhost:8082
 paths:
   /models:
     post:
@@ -59,9 +57,11 @@ components:
         modelPath:
           type: string
           description: Model files location path
+          example: '/home/libotadmin/NewYork'
         tilesetFilename:
           type: string
           description: Model tileset filename
+          example: 'tileset.json'
         metadata:
           $ref: '#/components/schemas/metadata'
     model:
@@ -96,109 +96,206 @@ components:
       type: object
       description: 3d tiles metadata payload
       required:
-        - identifier
-        - typename
-        - schema
-        - mdSource
-        - xml
-        - anytext
-        - insertDate
+        - productName
+        # - productVersion
+        - productType
+        - sourceDateStart
+        - sourceDateEnd
+        - maxAccuracyCE90
+        - absoluteAccuracyLEP90
+        - sensors
+        - footprint
+        - srsName
+        - region
+        - classification
+        - productionSystem
+        - productionSystemVer
+        - producerName
       properties:
-        identifier:
+        productId:
           type: string
-          description: Unique identifier
-        typename:
+          nullable: true
+          default: null
+          description: ID of product
+        productName:
           type: string
-          description: Typename for the metadata; typically the value of the root element tag (e.g. csw:Record, gmd:MD_Metadata)
-        schema:
+          maxLength: 50
+          description: Name of product
+        productVersion:
+          type: integer
+          example: 1
+          description: Number of version
+          readOnly: true
+        productType:
           type: string
-          description: Schema for the metadata; typically the target namespace (e.g. http://www.opengis.net/cat/csw/2.0.2, http://www.isotc211.org/2005/gmd)
-        mdSource:
-          type: string
-          description: MD source
-        xml:
-          type: string
-          description: Full XML representation
-        anytext:
-          type: string
-          description: Bag of XML element text values, used for full text search
-        insertDate:
-          type: string
-          format: date-time
-          description: Date of insertion
-        creationDate:
-          type: string
-          format: date-time
-          description: Creation date
-        validationDate:
-          type: string
-          format: date-time
-          description: Validation date
-        wktGeometry:
-          type: string
-          description: Well-Known-Text markup language for representing vector geometry objects
-        title:
-          type: string
-          description: Title
-        producerName:
-          type: string
-          description: The organization that produced/supplied the product
-          enum:
-            - IDFMU
-          default: IDFMU
+          description: Type of product (3DPhotoRealistic)
+          example: 3DPhotoRealistic
         description:
           type: string
-          description: Description
-        type:
+          maxLength: 250
+          nullable: true
+          description: description and comments
+        creationDate: # What should I do? date-time: yyyy-mm-dd and required: dd-mm-yyyy
           type: string
-          description: Type
-        classification:
+          format: date-time
+          nullable: true
+          description: Creation date
+        sourceDateStart: # What should I do? date-time: yyyy-mm-dd and required: dd-mm-yyyy
           type: string
-          description: Product classification
-        srs:
+          format: date-time
+          description: Oldest date of taken photo
+        sourceDateEnd: # What should I do? date-time: yyyy-mm-dd and required: dd-mm-yyyy
           type: string
-          description: The product reference system, including a vertical data
-        projectName:
+          format: date-time
+          description: Newest date of taken photo
+        minResolutionMeter:
+          type: number
+          format: double
+          nullable: true
+          example: 1.1
+          minimum: 0.01
+          maximum: 8000
+          description: Minimum resolution in meters
+        maxResolutionMeter:
+          type: number
+          format: double
+          nullable: true
+          example: 1.5
+          minimum: 0.01
+          maximum: 8000
+          description: Maximum resolution in meters
+        nominalResolution:
+          type: number
+          format: double
+          nullable: true
+          example: 5
+          minimum: 0
+          description: Number of points in one size unit
+        maxAccuracyCE90:
+          type: number
+          format: double
+          minimum: 0
+          description: Maximum absolute horizontal accuracy
+        absoluteAccuracyLEP90:
+          type: number
+          format: double
+          minimum: 0
+          maximum: 999
+          description: Absolute vertical accuracy
+        accuracySE90:
+          type: number
+          format: double
+          minimum: 0
+          nullable: true
+          maximum: 250
+          description: Absolute spherical accuracy
+        relativeAccuracyLEP90:
+          type: number
+          format: double
+          nullable: true
+          minimum: 0
+          maximum: 100
+          description: Relative vertical accuracy
+        visualAccuracy:
+          type: number
+          format: double
+          nullable: true
+          minimum: 0
+          maximum: 100
+          description: Measure of visual quality
+        sensors:
           type: string
-          description: Project name
-        version:
-          type: string
-          description: Version
-        centroid:
-          type: string
-          description: Centroid
+          description: All sensors that took part as a source to the product
         footprint:
+          $ref: '#/components/schemas/GeojsonGeometryPolygon'
+          description: Geographic demarkatetion of the product
+        heightRangeFrom:
+          type: number
+          format: double
+          nullable: true
+          description: Minimum height range of ground
+        heightRangeTo:
+          type: number
+          format: double
+          nullable: true
+          description: Maximum height range of ground
+        srsId:
+          type: integer
+          example: 4326
+          nullable: true
+          description: ID of srs
+        srsName:
           type: string
-          description: Footprint
-        timeBegin:
+          description: Name of the srsID
+        srsOrigin:
           type: string
-          format: date-time
-          description: Begining time
-        timeEnd:
-          type: string
-          format: date-time
-          description: Ending time
-        sensorType:
-          type: string
-          description: The sensor used as the source of the product
+          nullable: true
+          example: (30;40;50)
+          pattern: '^\(([-]?(0|[1-9]\d*)(\.\d+)?;){2}[-]?(0|[1-9]\d*)(\.\d+)?\)$'
+          description: First of axes
         region:
           type: string
-          description: Region
-        nominalResolution:
+          description: States
+        classification:
           type: string
-          description: Nominal resolution
-        accuracyLE90:
+          example: '"5"'
+          pattern: '^[0-9]$'
+          description: Classification of the product
+        compartmentalization:
           type: string
-          description: LE90 of the height values
-        horizontalAccuracyCE90:
+          nullable: true
+          description: compartmentalization of the product
+        productionSystem:
           type: string
-          description: CE90 of location of elevation points
-        relativeAccuracyLE90:
+          description: Production system
+        productionSystemVer:
           type: string
-          description: LE90 of distance measurement
-        estimatedPrecision:
+          maxLength: 20
+          description: Version production system
+        producerName:
           type: string
-          description: Estimated precision
-        measuredPrecision:
+          description: The name of the producer (product owner)
+        productionMethod:
           type: string
-          description: Measured precision
+          nullable: true
+          description: Method of the production
+        minFlightAlt:
+          type: number
+          format: double
+          description: Minimum height of the flight
+        maxFlightAlt:
+          type: number
+          nullable: true
+          format: double
+          description: Maximum height of the flight
+        geographicArea:
+          type: string
+          nullable: true
+          description: Area inside the region
+        productBoundingBox:
+          type: string
+          readOnly: true
+          pattern: '^([-+]?(0|[1-9]\d*)(\.\d+)?,){3}[-+]?(0|[1-9]\d*)(\.\d+)?$'
+          description: The bounding box of the product
+
+    GeojsonGeometryPolygon:
+      type: object
+      required:
+        - type
+        - coordinates
+      properties:
+        type:
+          type: string
+          enum:
+            - Polygon
+        coordinates:
+          type: array
+          items:
+            type: array
+            minItems: 5
+            items:
+              type: array
+              minItems: 2
+              items:
+                type: number
+      example: '{"type":"Polygon","coordinates":[[[1,2],[3,4],[5,6],[7,8],[1,2]]]}'

@@ -18,11 +18,16 @@ export class JobsManager {
     payload.percentage = 0;
     payload.tasks = [];
     const url = this.config.get<string>('jobUrl');
+    console.log(url);
+    console.log(payload);
     const response = await axios.post<Job>(url, payload);
+    console.log('RESPONSEEEEEE');
+    console.log(response);
     return response.data;
   }
 
   public async updateJobStatus(jobId: string, payload: JobUpdatePayload): Promise<void> {
+    console.log('ENTER UPDATE JOB STATUS');
     const url = this.config.get<string>('jobUrl');
     const updateUrl = `${url}/${jobId}`;
     await axios.put(updateUrl, payload);

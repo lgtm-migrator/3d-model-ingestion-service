@@ -61,7 +61,7 @@ components:
         tilesetFilename:
           type: string
           description: Model tileset filename
-          example: 'tileset.json'
+          default: 'tileset.json'
         metadata:
           $ref: '#/components/schemas/metadata'
     model:
@@ -87,9 +87,11 @@ components:
         modelPath:
           type: string
           description: Model files location path
+          example: '/home/libotadmin/NewYork'
         tilesetFilename:
           type: string
           description: Model tileset filename
+          default: 'tileset.json'
         metadata:
           $ref: '#/components/schemas/metadata'
     metadata:
@@ -206,6 +208,7 @@ components:
         sensors:
           type: string
           description: All sensors that took part as a source to the product
+          default: 'OTHER'
         footprint:
           $ref: '#/components/schemas/GeojsonGeometryPolygon'
           description: Geographic demarkatetion of the product

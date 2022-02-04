@@ -18,11 +18,11 @@ export class JobsManager {
     payload.percentage = 0;
     payload.tasks = [];
     const url = this.config.get<string>('jobUrl');
-    console.log(url);
-    console.log(payload);
+    // console.log(url);
+    // console.log(payload);
     const response = await axios.post<Job>(url, payload);
-    console.log('RESPONSEEEEEE');
-    console.log(response);
+    // console.log('RESPONSEEEEEE');
+    // console.log(response);
     return response.data;
   }
 

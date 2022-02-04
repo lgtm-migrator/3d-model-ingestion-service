@@ -56,5 +56,19 @@ describe('ModelsManager', () => {
 
       await expect(createPromise).rejects.toThrow('Flow service is not available');
     });
+
+    // it('updates job status to failed when flow is rejected', async () => {
+    //   const data: Payload = { modelPath: createModelPath(), tilesetFilename: createTilesetFilename(), metadata: createMetadata() };
+    //   const job = { ...data, jobId: createUuid(), status: 'Pending', reason: ''};
+    //   jobsManagerMock.createJob.mockResolvedValue(job);
+    //   flowsManagerMock.createFlow.mockRejectedValue(new Error('Flow service is not available'));
+    //   const updatedJob = job;
+    //   updatedJob.status = 'Failed';
+    //   updatedJob.reason = 'Connection error to Nifi';
+
+    //   await jobsManagerMock.updateJobStatus(updatedJob);
+
+    //   expect(jobsManagerMock.updateJobStatus).toHaveBeenCalledWith(updatedJob);
+    // });
   });
 });

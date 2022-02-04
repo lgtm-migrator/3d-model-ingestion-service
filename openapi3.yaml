@@ -61,7 +61,7 @@ components:
         tilesetFilename:
           type: string
           description: Model tileset filename
-          default: 'tileset.json'
+          example: 'tileset.json'
         metadata:
           $ref: '#/components/schemas/metadata'
     model:
@@ -91,7 +91,7 @@ components:
         tilesetFilename:
           type: string
           description: Model tileset filename
-          default: 'tileset.json'
+          example: 'tileset.json'
         metadata:
           $ref: '#/components/schemas/metadata'
     metadata:

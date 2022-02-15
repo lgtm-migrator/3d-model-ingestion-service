@@ -48,6 +48,13 @@ export const createModelPath = (): string => {
   return '/tmp/tilesets/TilesetWithDiscreteLOD';
 };
 
+export const createMountedModelPath = (): string => {
+  return '/mnt/mimi/libot/TilesetWithDiscreteLOD';
+};
+export const createWrongModelPath = (): string => {
+  return '/avi/meow/TilesetWithDiscreteLOD';
+};
+
 export const createTilesetFilename = (): string => {
   return 'tileset.json';
 };

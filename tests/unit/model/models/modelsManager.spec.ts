@@ -12,9 +12,12 @@ describe('ModelsManager', () => {
   const flowsManagerMock = {
     createFlow: jest.fn(),
   };
+  const validationManagerMock = {
+    validateModelPath: jest.fn(),
+  };
 
   beforeEach(() => {
-    modelsManager = new ModelsManager({ log: jest.fn() }, jobsManagerMock as any, flowsManagerMock as any);
+    modelsManager = new ModelsManager({ log: jest.fn() }, validationManagerMock as any, jobsManagerMock as any, flowsManagerMock as any);
   });
   afterEach(() => {
     jest.clearAllMocks();
@@ -28,6 +31,7 @@ describe('ModelsManager', () => {
       const model = { ...flow };
       jobsManagerMock.createJob.mockResolvedValue(job);
       flowsManagerMock.createFlow.mockResolvedValue(flow);
+      validationManagerMock.validateModelPath.mockResolvedValue(data);
 
       const created = await modelsManager.createModel(data);
 

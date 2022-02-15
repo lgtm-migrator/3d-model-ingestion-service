@@ -15,6 +15,9 @@ jobServiceUrl:  https://job-manager-discrete-ingestion-db-route-3d-dev.apps.v0h0
 
 flowServiceUrl: http://10.8.1.9:8083/flows
 
+paths:
+  mountPath: /mnt/mimi/libot
+  basePath: //domtest/mimi/archi/maz/silver/libot
 ingress:
   enabled: false
 

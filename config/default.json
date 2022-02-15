@@ -12,5 +12,9 @@
     "port": "8080"
   },
   "jobUrl": "https://job-manager-discrete-ingestion-db-route-3d-dev.apps.v0h0bdx6.eastus.aroapp.io/jobs",
-  "flowUrl": "http://10.8.1.9:8083/flows"
+  "flowUrl": "http://10.8.1.9:8083/flows",
+  "paths": {
+    "mountPath": "/mnt/mimi/libot",
+    "basePath": "//domtest/mimi/archi/maz/silver/libot"
+  }
 }

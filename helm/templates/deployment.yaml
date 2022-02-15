@@ -27,6 +27,10 @@ spec:
           value: {{ tpl .Values.jobServiceUrl . | quote }}
         - name: FLOW_SERVICE_URL
           value: {{ tpl .Values.flowServiceUrl . | quote }}
+        - name: MOUNT_PATH
+          value: {{ tpl .Values.paths.mountPath . | quote }}
+        - name: BASE_PATH
+          value: {{ tpl .Values.paths.basePath . | quote }}    
         ports:
         - containerPort: {{ .Values.service.internalPort | int }}
         livenessProbe:

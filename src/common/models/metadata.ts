@@ -3,7 +3,7 @@ import GeoJson from 'geojson';
 export interface Metadata {
   productId: string;
   productName: string;
-  productVersion: number;
+  // productVersion: number;
   productType: string;
   description?: string;
   creationDate?: string;
@@ -34,5 +34,5 @@ export interface Metadata {
   minFlightAlt?: number;
   maxFlightAlt?: number;
   geographicArea?: string;
-  productBoundingBox: string;
+  // productBoundingBox: string;
 }

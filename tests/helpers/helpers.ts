@@ -9,7 +9,6 @@ import { Model } from '../../src/common/models/model';
 
 const srsOriginHelper = new RandExp('^\\(([-]?(0|[1-9]\\d*)(\\.\\d+)?;){2}[-]?(0|[1-9]\\d*)(\\.\\d+)?\\)$').gen();
 const classificationHelper = new RandExp('^[0-9]$').gen();
-const productBoundingBoxHelper = new RandExp('^([-]?(0|[1-9]\\d*)(\\.\\d+)?,){3}[-]?(0|[1-9]\\d*)(\\.\\d+)?$').gen();
 const listOfRandomWords = ['avi', 'אבי', 'lalalalala', 'וןםפ'];
 const maxResolutionMeter = 8000;
 const maxAbsoluteAccuracyLEP90 = 999;
@@ -55,19 +54,8 @@ export const createTilesetFilename = (): string => {
 
 export const createMetadata = (): Metadata => {
   return {
-    //identifier: faker.random.uuid(),
-    //insertDate: faker.date.past(),
-
-    // type: faker.random.word(),
-    // typename: faker.random.word(),
-    // schema: faker.random.word(),
-    // mdSource: faker.random.word(),
-    // xml: faker.random.word(),
-    // anytext: faker.random.word(),
-
     productId: Math.floor(Math.random() * listOfRandomWords.length).toString(),
     productName: Math.floor(Math.random() * listOfRandomWords.length).toString(),
-    productVersion: faker.random.number(maxResolutionMeter),
     productType: faker.random.word(),
     description: Math.floor(Math.random() * listOfRandomWords.length).toString(),
     creationDate: faker.date.past().toISOString(),
@@ -98,7 +86,44 @@ export const createMetadata = (): Metadata => {
     minFlightAlt: faker.random.number(),
     maxFlightAlt: faker.random.number(),
     geographicArea: faker.random.word(),
-    productBoundingBox: productBoundingBoxHelper,
+  };
+};
+
+export const createInvalidMetadata = (): unknown => {
+  return {
+    productId: Math.floor(Math.random() * listOfRandomWords.length).toString(),
+    productName: Math.floor(Math.random() * listOfRandomWords.length).toString(),
+    // productVersion: faker.random.number(maxResolutionMeter),
+    productType: faker.random.word(),
+    description: Math.floor(Math.random() * listOfRandomWords.length).toString(),
+    creationDate: faker.date.past().toISOString(),
+    sourceDateStart: faker.date.past().toISOString(),
+    sourceDateEnd: faker.date.past().toISOString(),
+    minResolutionMeter: faker.random.number(maxResolutionMeter),
+    maxResolutionMeter: faker.random.number(maxResolutionMeter),
+    nominalResolution: faker.random.number(),
+    maxAccuracyCE90: faker.random.number(),
+    absoluteAccuracyLEP90: faker.random.number(maxAbsoluteAccuracyLEP90),
+    accuracySE90: faker.random.number(maxAccuracySE90),
+    relativeAccuracyLEP90: faker.random.number(maxRelativeAccuracyLEP90),
+    visualAccuracy: faker.random.number(maxVisualAccuracy),
+    sensors: faker.random.word(),
+    footprint: 1,
+    heightRangeFrom: faker.random.number(),
+    heightRangeTo: faker.random.number(),
+    srsId: faker.random.number(),
+    srsName: faker.random.word(),
+    srsOrigin: srsOriginHelper,
+    region: faker.random.word(),
+    classification: classificationHelper,
+    compartmentalization: faker.random.word(),
+    productionSystem: faker.random.word(),
+    productionSystemVer: Math.floor(Math.random() * listOfRandomWords.length).toString(),
+    producerName: faker.random.word(),
+    productionMethod: faker.random.word(),
+    minFlightAlt: faker.random.number(),
+    maxFlightAlt: faker.random.number(),
+    geographicArea: faker.random.word(),
   };
 };
 

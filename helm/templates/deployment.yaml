@@ -16,10 +16,17 @@ spec:
       labels:
         app: {{ $fullname }}
     spec:
+      volumes:
+      - name: ingestion-storage
+        persistentVolumeClaim:
+          claimName: {{ .Values.storage.ingestionSourcePvc.name }}
       containers:
       - name: {{ .Chart.Name }}
         image: "{{ .Values.image }}"
         imagePullPolicy: IfNotPresent
+        volumeMounts: 
+            - name: ingestion-storage
+              mountPath: {{ .Values.storage.pv.ingestionPv.hostPath }}
         env:
         - name: SERVER_PORT
           value: {{ .Values.service.internalPort | quote }}

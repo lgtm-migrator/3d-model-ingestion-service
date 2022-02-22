@@ -12,6 +12,7 @@
   "flowUrl": "FLOW_SERVICE_URL",
   "paths": {
     "mountPath": "MOUNT_PATH",
-    "basePath": "BASE_PATH"
+    "basePath": "BASE_PATH",
+    "pvPath": "PV_PATH"
   }
 }

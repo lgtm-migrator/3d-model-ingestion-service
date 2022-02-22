@@ -3,6 +3,7 @@
   "flowUrl": "http://localhost:8083/flows",
   "paths": {
     "mountPath": "/mnt/mimi/libot",
-    "basePath": "/tmp/tilesets"
+    "basePath": "/tmp/tilesets",
+    "pvPath": "/3Dmodels"
   }
 }

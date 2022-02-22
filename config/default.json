@@ -15,6 +15,7 @@
   "flowUrl": "http://10.8.1.9:8083/flows",
   "paths": {
     "mountPath": "/mnt/mimi/libot",
-    "basePath": "\\\\domtest\\mimi\\archi\\maz\\silver\\libot"
+    "basePath": "\\\\domtest\\mimi\\archi\\maz\\silver\\libot",
+    "pvPath": "../src"
   }
 }

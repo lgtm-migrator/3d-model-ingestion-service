@@ -37,7 +37,9 @@ spec:
         - name: MOUNT_PATH
           value: {{ tpl .Values.paths.mountPath . | quote }}
         - name: BASE_PATH
-          value: {{ tpl .Values.paths.basePath . | quote }}    
+          value: {{ tpl .Values.paths.basePath . | quote }}
+        - name: PV_PATH
+          value: {{ tpl .Values.storage.pv.ingestionPv.hostPath . | quote }}          
         ports:
         - containerPort: {{ .Values.service.internalPort | int }}
         livenessProbe:

@@ -38,8 +38,8 @@ route:
 
 storage:
   ingestionSourcePvc:
-    enabled: true
-    name: ingestion-source-pvc
+    enabled: false
+    name: 3d-pvc
     size: 5Gi
     subPath: ingestion-source
   storageClass: azure-file

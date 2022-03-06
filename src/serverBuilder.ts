@@ -48,9 +48,9 @@ export class ServerBuilder {
     this.serverInstance.use(cors());
     this.serverInstance.use(bodyParser.json());
 
-    //const ignorePathRegex = new RegExp(`^(${this.config.get<string>('openapiConfig.basePath')})|(explorer)/.*`, 'i');
-    //const apiSpecPath = this.config.get<string>('openapiConfig.filePath');
-    //this.serverInstance.use(OpenApiMiddleware({ apiSpec: apiSpecPath, validateRequests: true, ignorePaths: ignorePathRegex }));
+    const ignorePathRegex = new RegExp(`^(${this.config.get<string>('openapiConfig.basePath')})|(explorer)/.*`, 'i');
+    const apiSpecPath = this.config.get<string>('openapiConfig.filePath');
+    this.serverInstance.use(OpenApiMiddleware({ apiSpec: apiSpecPath, validateRequests: true, ignorePaths: ignorePathRegex }));
 
     this.serverInstance.use(this.requestLogger.getLoggerMiddleware());
   }

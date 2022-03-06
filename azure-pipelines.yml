@@ -44,3 +44,5 @@ stages:
               # the name of the app. the name of the image and the name of the chart will be the same.
               #appName: mapproxinator
               appName: '3d-model-ingestion-service'
+              teamName: '3D'
+              bumpPipeline: ''

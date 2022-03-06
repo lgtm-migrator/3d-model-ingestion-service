@@ -14,7 +14,7 @@
   "jobUrl": "https://job-manager-discrete-ingestion-db-route-3d-dev.apps.v0h0bdx6.eastus.aroapp.io/jobs",
   "flowUrl": "http://10.8.1.9:8083/flows",
   "paths": {
-    "mountPath": "/mnt/mimi/libot",
+    "mountPath": "/home/libotadmin",
     "basePath": "\\\\domtest\\mimi\\archi\\maz\\silver\\libot",
     "pvPath": "../src"
   }

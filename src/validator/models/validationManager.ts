@@ -11,7 +11,7 @@ export class ValidationManager {
     const basePath = this.config.get<string>('paths.basePath');
     const mountPath = this.config.get<string>('paths.mountPath');
     if (payload['modelPath'].includes(basePath)) {
-      const newModelPath = payload['modelPath'].replace(basePath, mountPath);
+      const newModelPath = payload['modelPath'].replace(basePath + '\\', mountPath + '/');
       payload['modelPath'] = newModelPath;
       return payload;
     }

@@ -45,7 +45,7 @@ export const createUuid = (): string => {
 };
 
 export const createModelPath = (): string => {
-  return '/tmp/tilesets/TilesetWithDiscreteLOD';
+  return '\\\\tmp\\tilesets\\TilesetWithDiscreteLOD';
 };
 
 export const createMountedModelPath = (): string => {

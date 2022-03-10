@@ -3,7 +3,7 @@
 port: 8080
 
 # Name of the image tu pull from registry
-image: acrarolibotnonprod.azurecr.io/3d-model-ingestion-service:vFix
+image: acrarolibotnonprod.azurecr.io/3d-model-ingestion-service:vDev
 
 replicaCount: 1
 
@@ -16,7 +16,7 @@ jobServiceUrl:  https://job-manager-discrete-ingestion-db-route-3d-dev.apps.v0h0
 flowServiceUrl: http://10.8.1.9:8083/flows
 
 paths:
-  mountPath: /mnt/mimi/libot
+  mountPath: /home/libotadmin
   basePath: \\domtest\mimi\archi\maz\silver\libot
 ingress:
   enabled: false

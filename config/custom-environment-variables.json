@@ -9,5 +9,10 @@
     "port": "SERVER_PORT"
   },
   "jobUrl": "JOB_SERVICE_URL",
-  "flowUrl": "FLOW_SERVICE_URL"
+  "flowUrl": "FLOW_SERVICE_URL",
+  "paths": {
+    "mountPath": "MOUNT_PATH",
+    "basePath": "BASE_PATH",
+    "pvPath": "PV_PATH"
+  }
 }

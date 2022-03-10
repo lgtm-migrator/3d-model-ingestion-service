@@ -12,9 +12,12 @@ describe('ModelsManager', () => {
   const flowsManagerMock = {
     createFlow: jest.fn(),
   };
+  const validationManagerMock = {
+    validateModelPath: jest.fn(),
+  };
 
   beforeEach(() => {
-    modelsManager = new ModelsManager({ log: jest.fn() }, jobsManagerMock as any, flowsManagerMock as any);
+    modelsManager = new ModelsManager({ log: jest.fn() }, validationManagerMock as never, jobsManagerMock as never, flowsManagerMock as never);
   });
   afterEach(() => {
     jest.clearAllMocks();
@@ -28,6 +31,7 @@ describe('ModelsManager', () => {
       const model = { ...flow };
       jobsManagerMock.createJob.mockResolvedValue(job);
       flowsManagerMock.createFlow.mockResolvedValue(flow);
+      validationManagerMock.validateModelPath.mockResolvedValue(data);
 
       const created = await modelsManager.createModel(data);
 
@@ -55,6 +59,20 @@ describe('ModelsManager', () => {
       const createPromise = modelsManager.createModel(data);
 
       await expect(createPromise).rejects.toThrow('Flow service is not available');
+    });
+
+    it('updates job status to failed when flow is rejected', async () => {
+      const data: Payload = { modelPath: createModelPath(), tilesetFilename: createTilesetFilename(), metadata: createMetadata() };
+      const job = { ...data, jobId: createUuid(), status: 'Pending', reason: '' };
+      jobsManagerMock.createJob.mockResolvedValue(job);
+      flowsManagerMock.createFlow.mockRejectedValue(new Error('Flow service is not available'));
+      const updatedJob = job;
+      updatedJob.status = 'Failed';
+      updatedJob.reason = 'Connection error to Nifi';
+
+      await jobsManagerMock.updateJobStatus(updatedJob);
+
+      expect(jobsManagerMock.updateJobStatus).toHaveBeenCalledWith(updatedJob);
     });
   });
 });

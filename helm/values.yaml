@@ -3,7 +3,7 @@
 port: 8080
 
 # Name of the image tu pull from registry
-image: mapcolonies/3d-model-ingestion-service:latest
+image: acrarolibotnonprod.azurecr.io/3d-model-ingestion-service:vDev
 
 replicaCount: 1
 
@@ -11,11 +11,15 @@ service:
   internalPort: 8080
   externalPort: 8080
 
-jobServiceUrl: http://discrete-ingestion-db:8080/jobs
-flowServiceUrl: http://nifi:8080
+jobServiceUrl:  https://job-manager-discrete-ingestion-db-route-3d-dev.apps.v0h0bdx6.eastus.aroapp.io/jobs
 
+flowServiceUrl: http://10.8.1.9:8083/flows
+
+paths:
+  mountPath: /home/libotadmin
+  basePath: \\domtest\mimi\archi\maz\silver\libot
 ingress:
-  enabled: true
+  enabled: false
 
   annotations:
     kubernetes.io/ingress.class: "nginx"
@@ -27,7 +31,22 @@ ingress:
   hosts: ["minikube.local"]
 
 route:
-  enabled: false
+  enabled: true
 
   annotations:
     haproxy.router.openshift.io/rewrite-target: "/"
+
+storage:
+  ingestionSourcePvc:
+    enabled: false
+    name: 3d-pvc
+    size: 5Gi
+    subPath: ingestion-source
+  storageClass: azure-file
+  accessModes: ReadWriteMany
+  pv: #for local dev deployment
+    ingestionPv:
+      name: ingestion-source-pv
+      enabled: false
+      size: 5Gi
+      hostPath: /3Dmodels    

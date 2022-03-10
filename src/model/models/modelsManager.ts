@@ -8,11 +8,13 @@ import { Flow } from '../../common/models/flow';
 import { Job } from '../../common/models/job';
 import { Model } from '../../common/models/model';
 import { Payload } from '../../common/models/payload';
+import { ValidationManager } from '../../validator/models/validationManager';
 
 @injectable()
 export class ModelsManager {
   public constructor(
     @inject(Services.LOGGER) private readonly logger: ILogger,
+    private readonly validator: ValidationManager,
     private readonly jobs: JobsManager,
     private readonly flows: FlowsManager
   ) {}
@@ -20,10 +22,11 @@ export class ModelsManager {
   public async createModel(payload: Payload): Promise<Model> {
     this.logger.log('info', `*** Create Model ***`);
     const modelId = uuid();
+    //change model path from payload
+    payload = this.validator.validateModelPath(payload);
     const createdJob: Job = await this.jobs.createJob({ resourceId: modelId, parameters: payload });
     try {
       const createdFlow: Flow = await this.flows.createFlow({ ...payload, jobId: createdJob.id });
-
       return { ...createdFlow, modelId };
     } catch (error) {
       await this.jobs.updateJobStatus(createdJob.id, { status: 'Failed', reason: 'Connection error to Nifi' });

@@ -45,4 +45,4 @@ stages:
               #appName: mapproxinator
               appName: '3d-model-ingestion-service'
               teamName: '3D'
-              #bumpPipeline: ''
+              bumpPipeline: '95'

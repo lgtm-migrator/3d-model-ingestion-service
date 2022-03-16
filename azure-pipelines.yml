@@ -35,7 +35,7 @@ stages:
               # dockerRegistryServiceConnection:
               # the path to the docker file Default is [root Folder]/DockerFile
               dockerfilePaths:
-                - name: mapproxinator
+                - name: 3d-model-ingestion-service
                   path: '$(Build.SourcesDirectory)/Dockerfile'
               # the url of the helm registry Default [ACR non prod registry url]
               # helmrRegistryUrl:

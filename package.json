@@ -44,7 +44,7 @@
     "@map-colonies/mc-probe": "^1.0.0",
     "@map-colonies/openapi-express-viewer": "^2.0.1",
     "@map-colonies/standard-version-update-helm-version": "^2.0.1",
-    "@map-colonies/storage-explorer-middleware": "^1.1.0",
+    "@map-colonies/storage-explorer-middleware": "^1.2.3",
     "@types/geojson": "^7946.0.8",
     "axios": "^0.21.4",
     "config": "^3.3.3",

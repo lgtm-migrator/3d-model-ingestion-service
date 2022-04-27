@@ -1,5 +1,5 @@
 port: 8080
-image: 'acrarolibotnonprod.azurecr.io/3d-model-ingestion-service:vDev'
+image: 'acrarolibotnonprod.azurecr.io/3d-model-ingestion-service:v1.4.2'
 replicaCount: 1
 service:
   internalPort: 8080

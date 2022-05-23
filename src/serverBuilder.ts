@@ -6,9 +6,10 @@ import { getErrorHandlerMiddleware } from '@map-colonies/error-express-handler';
 import { middleware as OpenApiMiddleware } from 'express-openapi-validator';
 import { container, inject, injectable } from 'tsyringe';
 import getStorageExplorerMiddleware from '@map-colonies/storage-explorer-middleware';
+import { Logger } from '@map-colonies/js-logger';
 import { RequestLogger } from './common/middlewares/RequestLogger';
-import { Services } from './common/constants';
-import { IConfig, ILogger } from './common/interfaces';
+import { SERVICES } from './common/constants';
+import { IConfig } from './common/interfaces';
 import { modelsRouterFactory } from './model/routes/modelsRouter';
 import { mountDirs } from './common/models/mountDirs';
 
@@ -17,9 +18,9 @@ export class ServerBuilder {
   private readonly serverInstance: express.Application;
 
   public constructor(
-    @inject(Services.CONFIG) private readonly config: IConfig,
+    @inject(SERVICES.CONFIG) private readonly config: IConfig,
     private readonly requestLogger: RequestLogger,
-    @inject(Services.LOGGER) private readonly logger: ILogger
+    @inject(SERVICES.LOGGER) private readonly logger: Logger
   ) {
     this.serverInstance = express();
   }
@@ -57,6 +58,6 @@ export class ServerBuilder {
 
   private registerPostRoutesMiddleware(): void {
     this.serverInstance.options('*', cors);
-    this.serverInstance.use(getErrorHandlerMiddleware((message) => this.logger.log('error', message)));
+    this.serverInstance.use(getErrorHandlerMiddleware());
   }
 }

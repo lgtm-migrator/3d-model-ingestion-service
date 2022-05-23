@@ -1,5 +1,6 @@
 import mockAxios from 'jest-mock-axios';
 import config from 'config';
+import jsLogger from '@map-colonies/js-logger';
 import { FlowsManager } from '../../../../src/flow/models/flowsManager';
 import { createFakeFlow } from '../../../helpers/helpers';
 
@@ -7,7 +8,8 @@ describe('FlowsManager', () => {
   let flowsManager: FlowsManager;
 
   beforeEach(() => {
-    flowsManager = new FlowsManager(config, { log: jest.fn() });
+
+    flowsManager = new FlowsManager(config, jsLogger({ enabled: false }));
   });
   afterEach(() => {
     jest.clearAllMocks();

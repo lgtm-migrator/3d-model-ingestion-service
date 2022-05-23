@@ -1,3 +1,4 @@
+import jsLogger from '@map-colonies/js-logger';
 import { Payload } from '../../../../src/common/models/payload';
 import { ModelsManager } from '../../../../src/model/models/modelsManager';
 import { createMetadata, createModelPath, createTilesetFilename, createUuid } from '../../../helpers/helpers';
@@ -17,7 +18,7 @@ describe('ModelsManager', () => {
   };
 
   beforeEach(() => {
-    modelsManager = new ModelsManager({ log: jest.fn() }, validationManagerMock as never, jobsManagerMock as never, flowsManagerMock as never);
+    modelsManager = new ModelsManager(jsLogger({ enabled: false }) , validationManagerMock as never, jobsManagerMock as never, flowsManagerMock as never);
   });
   afterEach(() => {
     jest.clearAllMocks();

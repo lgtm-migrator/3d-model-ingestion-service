@@ -20,7 +20,7 @@ export class ModelsManager {
   ) {}
 
   public async createModel(payload: Payload): Promise<Model> {
-    this.logger.info( `*** Create Model ***`);
+    this.logger.info(`*** Create Model ***`);
     const modelId = uuid();
     //change model path from payload
     payload = this.validator.validateModelPath(payload);

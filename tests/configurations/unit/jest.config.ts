@@ -3,6 +3,7 @@ import type { Config } from '@jest/types';
 const config: Config.InitialOptions = {
   rootDir: '../../../.',
   transform: {
+    // eslint-disable-next-line @typescript-eslint/naming-convention
     '^.+\\.ts$': 'ts-jest',
   },
   testMatch: ['<rootDir>/tests/unit/**/*.spec.ts'],

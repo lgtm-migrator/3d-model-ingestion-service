@@ -1,4 +1,4 @@
-import config from 'config';  
+import config from 'config';
 import jsLogger from '@map-colonies/js-logger';
 import { ValidationManager } from '../../../../src/validator/models/validationManager';
 import { Payload } from '../../../../src/common/models/payload';

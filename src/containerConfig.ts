@@ -1,9 +1,7 @@
-import { readFileSync } from 'fs';
 import config from 'config';
-import { logMethod } from '@map-colonies/telemetry';
 import { DependencyContainer } from 'tsyringe/dist/typings/types';
 import jsLogger, { LoggerOptions } from '@map-colonies/js-logger';
-import {  Metrics } from '@map-colonies/telemetry';
+import { Metrics } from '@map-colonies/telemetry';
 import { trace } from '@opentelemetry/api';
 import { SERVICES, SERVICE_NAME } from './common/constants';
 import { InjectionObject, registerDependencies } from './common/dependencyRegistration';
@@ -16,9 +14,6 @@ export interface RegisterOptions {
 
 export const registerExternalValues = (options?: RegisterOptions): DependencyContainer => {
   const loggerConfig = config.get<LoggerOptions>('logger');
-  const packageContent = readFileSync('./package.json', 'utf8');
-  //const service = JSON.parse(packageContent) as IServiceConfig;
-  //const logger = new MCLogger(loggerConfig, service);
   const logger = jsLogger({ ...loggerConfig, prettyPrint: loggerConfig.prettyPrint });
 
   const metrics = new Metrics(SERVICE_NAME);
@@ -46,4 +41,3 @@ export const registerExternalValues = (options?: RegisterOptions): DependencyCon
 
   return registerDependencies(dependencies, options?.override, options?.useChild);
 };
-

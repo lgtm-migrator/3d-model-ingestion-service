@@ -6,11 +6,10 @@ import { Logger } from '@map-colonies/js-logger';
 import { container } from 'tsyringe';
 import config from 'config';
 import { getApp } from './app';
-import { DEFAULT_SERVER_PORT ,SERVICES} from './common/constants';
+import { DEFAULT_SERVER_PORT, SERVICES } from './common/constants';
 
 const port: number = config.get<number>('server.port') || DEFAULT_SERVER_PORT;
 const app = getApp();
-
 
 const logger = container.resolve<Logger>(SERVICES.LOGGER);
 const stubHealthcheck = async (): Promise<void> => Promise.resolve();

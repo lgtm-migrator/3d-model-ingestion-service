@@ -18,7 +18,12 @@ describe('ModelsManager', () => {
   };
 
   beforeEach(() => {
-    modelsManager = new ModelsManager(jsLogger({ enabled: false }) , validationManagerMock as never, jobsManagerMock as never, flowsManagerMock as never);
+    modelsManager = new ModelsManager(
+      jsLogger({ enabled: false }),
+      validationManagerMock as never,
+      jobsManagerMock as never,
+      flowsManagerMock as never
+    );
   });
   afterEach(() => {
     jest.clearAllMocks();

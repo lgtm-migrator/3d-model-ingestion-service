@@ -1,5 +1,5 @@
 import mockAxios from 'jest-mock-axios';
-import config from 'config';  
+import config from 'config';
 import jsLogger from '@map-colonies/js-logger';
 import { JobsManager } from '../../../../src/job/models/jobsManager';
 import { createFakeJobPayload, createFakeJob } from '../../../helpers/helpers';

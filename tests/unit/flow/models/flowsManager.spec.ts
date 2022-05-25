@@ -8,7 +8,6 @@ describe('FlowsManager', () => {
   let flowsManager: FlowsManager;
 
   beforeEach(() => {
-
     flowsManager = new FlowsManager(config, jsLogger({ enabled: false }));
   });
   afterEach(() => {

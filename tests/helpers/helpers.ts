@@ -1,5 +1,5 @@
 import RandExp from 'randexp';
-import {randNumber,randPastDate,randUuid, randWord} from '@ngneat/falso';
+import { randNumber, randPastDate, randUuid, randWord } from '@ngneat/falso';
 import { Geometry } from 'geojson';
 import { Flow } from '../../src/common/models/flow';
 import { Job } from '../../src/common/models/job';
@@ -68,14 +68,14 @@ export const createMetadata = (): Metadata => {
     creationDate: randPastDate().toISOString(),
     sourceDateStart: randPastDate().toISOString(),
     sourceDateEnd: randPastDate().toISOString(),
-    minResolutionMeter: randNumber({min:0,max:maxResolutionMeter}),
-    maxResolutionMeter: randNumber({min:0,max:maxResolutionMeter}),
+    minResolutionMeter: randNumber({ min: 0, max: maxResolutionMeter }),
+    maxResolutionMeter: randNumber({ min: 0, max: maxResolutionMeter }),
     nominalResolution: randNumber(),
     maxAccuracyCE90: randNumber(),
-    absoluteAccuracyLEP90: randNumber({min:0,max:maxAbsoluteAccuracyLEP90}),
-    accuracySE90: randNumber({min:0,max:maxAccuracySE90}),
-    relativeAccuracyLEP90: randNumber({min:0,max:maxRelativeAccuracyLEP90}),
-    visualAccuracy: randNumber({min:0,max:maxVisualAccuracy}),
+    absoluteAccuracyLEP90: randNumber({ min: 0, max: maxAbsoluteAccuracyLEP90 }),
+    accuracySE90: randNumber({ min: 0, max: maxAccuracySE90 }),
+    relativeAccuracyLEP90: randNumber({ min: 0, max: maxRelativeAccuracyLEP90 }),
+    visualAccuracy: randNumber({ min: 0, max: maxVisualAccuracy }),
     sensors: randWord(),
     footprint: exampleGeometry,
     heightRangeFrom: randNumber(),
@@ -106,14 +106,14 @@ export const createInvalidMetadata = (): unknown => {
     creationDate: randPastDate().toISOString(),
     sourceDateStart: randPastDate().toISOString(),
     sourceDateEnd: randPastDate().toISOString(),
-    minResolutionMeter: randNumber({min:0,max:maxResolutionMeter}),
-    maxResolutionMeter: randNumber({min:0,max:maxResolutionMeter}),
+    minResolutionMeter: randNumber({ min: 0, max: maxResolutionMeter }),
+    maxResolutionMeter: randNumber({ min: 0, max: maxResolutionMeter }),
     nominalResolution: randNumber(),
     maxAccuracyCE90: randNumber(),
-    absoluteAccuracyLEP90: randNumber({min:0,max:maxAbsoluteAccuracyLEP90}),
-    accuracySE90: randNumber({min:0,max:maxAccuracySE90}),
-    relativeAccuracyLEP90: randNumber({min:0,max:maxRelativeAccuracyLEP90}),
-    visualAccuracy: randNumber({min:0,max:maxVisualAccuracy}),
+    absoluteAccuracyLEP90: randNumber({ min: 0, max: maxAbsoluteAccuracyLEP90 }),
+    accuracySE90: randNumber({ min: 0, max: maxAccuracySE90 }),
+    relativeAccuracyLEP90: randNumber({ min: 0, max: maxRelativeAccuracyLEP90 }),
+    visualAccuracy: randNumber({ min: 0, max: maxVisualAccuracy }),
     sensors: randWord(),
     footprint: 1,
     heightRangeFrom: randNumber(),

@@ -16,4 +16,6 @@ spec:
   to:
     kind: Service
     name: {{ $fullname }}
+  tls:
+    termination: edge  
 {{- end -}}

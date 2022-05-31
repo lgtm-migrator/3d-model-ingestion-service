@@ -6,12 +6,13 @@
     "uiPath": "/api"
   },
   "logger": {
-    "level": "info"
+    "level": "info",
+    "prettyPrint": false
   },
   "server": {
     "port": "8080"
   },
-  "jobUrl": "https://job-manager-discrete-ingestion-db-route-3d-dev.apps.v0h0bdx6.eastus.aroapp.io/jobs",
+  "jobUrl": "https://job-manager-3d-dev-discrete-ingestion-db-route-3d-dev.apps.v0h0bdx6.eastus.aroapp.io/jobs",
   "flowUrl": "http://10.8.1.9:8083/flows",
   "paths": {
     "mountPath": "/home/libotadmin",

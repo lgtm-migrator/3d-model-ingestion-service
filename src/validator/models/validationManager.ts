@@ -1,11 +1,12 @@
 import { inject, injectable } from 'tsyringe';
-import { Services } from '../../common/constants';
-import { IConfig, ILogger } from '../../common/interfaces';
+import { Logger } from '@map-colonies/js-logger';
+import { SERVICES } from '../../common/constants';
+import { IConfig } from '../../common/interfaces';
 import { Payload } from '../../common/models/payload';
 
 @injectable()
 export class ValidationManager {
-  public constructor(@inject(Services.CONFIG) private readonly config: IConfig, @inject(Services.LOGGER) private readonly logger: ILogger) {}
+  public constructor(@inject(SERVICES.CONFIG) private readonly config: IConfig, @inject(SERVICES.LOGGER) private readonly logger: Logger) {}
 
   public validateModelPath(payload: Payload): Payload {
     const basePath = this.config.get<string>('paths.basePath');

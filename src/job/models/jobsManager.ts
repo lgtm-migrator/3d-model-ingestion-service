@@ -1,17 +1,18 @@
 import axios from 'axios';
 import { inject, injectable } from 'tsyringe';
-import { Services } from '../../common/constants';
-import { IConfig, ILogger } from '../../common/interfaces';
+import { Logger } from '@map-colonies/js-logger';
+import { SERVICES } from '../../common/constants';
+import { IConfig } from '../../common/interfaces';
 import { Job } from '../../common/models/job';
 import { JobPayload } from '../../common/models/jobPayload';
 import { JobUpdatePayload } from '../../common/models/jobUpdatePayload';
 
 @injectable()
 export class JobsManager {
-  public constructor(@inject(Services.CONFIG) private readonly config: IConfig, @inject(Services.LOGGER) private readonly logger: ILogger) {}
+  public constructor(@inject(SERVICES.CONFIG) private readonly config: IConfig, @inject(SERVICES.LOGGER) private readonly logger: Logger) {}
 
   public async createJob(payload: JobPayload): Promise<Job> {
-    this.logger.log('info', `Create a new job: ${JSON.stringify(payload)}`);
+    this.logger.info(`Create a new job: ${JSON.stringify(payload)}`);
     payload.version = '1';
     payload.type = '3D';
     payload.description = '3D Model Ingestion';

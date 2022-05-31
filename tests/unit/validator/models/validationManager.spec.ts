@@ -1,4 +1,5 @@
 import config from 'config';
+import jsLogger from '@map-colonies/js-logger';
 import { ValidationManager } from '../../../../src/validator/models/validationManager';
 import { Payload } from '../../../../src/common/models/payload';
 import { createMetadata, createModelPath, createTilesetFilename, createMountedModelPath, createWrongModelPath } from '../../../helpers/helpers';
@@ -7,7 +8,7 @@ describe('ValidationManager', () => {
   let validationManager: ValidationManager;
 
   beforeEach(() => {
-    validationManager = new ValidationManager(config, { log: jest.fn() });
+    validationManager = new ValidationManager(config, jsLogger({ enabled: false }));
   });
   afterEach(() => {
     jest.clearAllMocks();

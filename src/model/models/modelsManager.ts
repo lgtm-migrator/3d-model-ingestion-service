@@ -1,9 +1,9 @@
 import { inject, injectable } from 'tsyringe';
 import { v4 as uuid } from 'uuid';
+import { Logger } from '@map-colonies/js-logger';
 import { FlowsManager } from '../../flow/models/flowsManager';
 import { JobsManager } from '../../job/models/jobsManager';
-import { Services } from '../../common/constants';
-import { ILogger } from '../../common/interfaces';
+import { SERVICES } from '../../common/constants';
 import { Flow } from '../../common/models/flow';
 import { Job } from '../../common/models/job';
 import { Model } from '../../common/models/model';
@@ -13,14 +13,14 @@ import { ValidationManager } from '../../validator/models/validationManager';
 @injectable()
 export class ModelsManager {
   public constructor(
-    @inject(Services.LOGGER) private readonly logger: ILogger,
+    @inject(SERVICES.LOGGER) private readonly logger: Logger,
     private readonly validator: ValidationManager,
     private readonly jobs: JobsManager,
     private readonly flows: FlowsManager
   ) {}
 
   public async createModel(payload: Payload): Promise<Model> {
-    this.logger.log('info', `*** Create Model ***`);
+    this.logger.info(`*** Create Model ***`);
     const modelId = uuid();
     //change model path from payload
     payload = this.validator.validateModelPath(payload);

@@ -95,7 +95,7 @@ export const createMetadata = (): Layer3DMetadata => {
     productBoundingBox: undefined,
     productVersion: undefined,
     type: RecordType.RECORD_3D,
-    updateDate: undefined
+    updateDate: undefined,
   };
 };
 

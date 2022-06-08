@@ -1,7 +1,6 @@
 import httpStatusCodes from 'http-status-codes';
 import mockAxios from 'jest-mock-axios';
 import { container } from 'tsyringe';
-import { FlowsManager } from '../../../../src/flow/models/flowsManager';
 import { createInvalidMetadata, createMetadata, createModelPath, createTilesetFilename } from '../../../helpers/helpers';
 import { registerTestValues } from '../../testContainerConfig';
 import * as requestSender from './helpers/requestSender';
@@ -18,7 +17,6 @@ describe('ModelsController', function () {
 
   describe('POST /models', function () {
     describe('Happy Path 🙂', function () {
-
       it('should return 201 status code and the added model', async function () {
         const validRequest = { modelPath: createModelPath(), tilesetFilename: createTilesetFilename(), metadata: createMetadata() };
         const model = { ...validRequest };
@@ -34,9 +32,7 @@ describe('ModelsController', function () {
       });
     });
 
-
     describe('Bad Path 😡', function () {
-
       it('should return 400 status code and error message if model path field is missing', async function () {
         const invalidRequest = { tilesetFilename: createTilesetFilename(), metadata: createMetadata() };
 
@@ -83,17 +79,6 @@ describe('ModelsController', function () {
         expect(response.status).toBe(httpStatusCodes.INTERNAL_SERVER_ERROR);
         expect(response.body).toHaveProperty('message', 'Service is not available');
       });
-
-      it('should return 500 status code if a nifi exception happens', async function () {
-        const validRequest = { modelPath: createModelPath(), tilesetFilename: createTilesetFilename(), metadata: createMetadata() };
-        mockAxios.post.mockRejectedValue(new Error('Service is not available'));
-        
-        const response = await requestSender.createModel(validRequest);
-
-        expect(response.status).toBe(httpStatusCodes.INTERNAL_SERVER_ERROR);
-        expect(response.body).toHaveProperty('message', 'Service is not available');
-      });
-
     });
   });
 });

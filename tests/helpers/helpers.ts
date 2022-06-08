@@ -1,10 +1,10 @@
 import RandExp from 'randexp';
 import { randNumber, randPastDate, randUuid, randWord } from '@ngneat/falso';
 import { Geometry } from 'geojson';
+import { Layer3DMetadata, ProductType, RecordType } from '@map-colonies/mc-model-types';
 import { Flow } from '../../src/common/models/flow';
 import { Job } from '../../src/common/models/job';
 import { JobPayload } from '../../src/common/models/jobPayload';
-import { Metadata } from '../../src/common/models/metadata';
 import { Model } from '../../src/common/models/model';
 
 const srsOriginHelper = new RandExp('^\\(([-]?(0|[1-9]\\d*)(\\.\\d+)?;){2}[-]?(0|[1-9]\\d*)(\\.\\d+)?\\)$').gen();
@@ -59,15 +59,15 @@ export const createTilesetFilename = (): string => {
   return 'tileset.json';
 };
 
-export const createMetadata = (): Metadata => {
+export const createMetadata = (): Layer3DMetadata => {
   return {
     productId: Math.floor(Math.random() * listOfRandomWords.length).toString(),
     productName: Math.floor(Math.random() * listOfRandomWords.length).toString(),
-    productType: randWord(),
+    productType: ProductType.PHOTO_REALISTIC_3D,
     description: Math.floor(Math.random() * listOfRandomWords.length).toString(),
-    creationDate: randPastDate().toISOString(),
-    sourceDateStart: randPastDate().toISOString(),
-    sourceDateEnd: randPastDate().toISOString(),
+    creationDate: randPastDate(),
+    sourceDateStart: randPastDate(),
+    sourceDateEnd: randPastDate(),
     minResolutionMeter: randNumber({ min: 0, max: maxResolutionMeter }),
     maxResolutionMeter: randNumber({ min: 0, max: maxResolutionMeter }),
     nominalResolution: randNumber(),
@@ -76,16 +76,15 @@ export const createMetadata = (): Metadata => {
     accuracySE90: randNumber({ min: 0, max: maxAccuracySE90 }),
     relativeAccuracyLEP90: randNumber({ min: 0, max: maxRelativeAccuracyLEP90 }),
     visualAccuracy: randNumber({ min: 0, max: maxVisualAccuracy }),
-    sensors: randWord(),
+    sensors: [randWord()],
     footprint: exampleGeometry,
     heightRangeFrom: randNumber(),
     heightRangeTo: randNumber(),
-    srsId: randNumber(),
+    srsId: randNumber().toString(),
     srsName: randWord(),
     srsOrigin: srsOriginHelper,
-    region: randWord(),
+    region: [randWord()],
     classification: classificationHelper,
-    compartmentalization: randWord(),
     productionSystem: randWord(),
     productionSystemVer: Math.floor(Math.random() * listOfRandomWords.length).toString(),
     producerName: randWord(),
@@ -93,6 +92,10 @@ export const createMetadata = (): Metadata => {
     minFlightAlt: randNumber(),
     maxFlightAlt: randNumber(),
     geographicArea: randWord(),
+    productBoundingBox: undefined,
+    productVersion: undefined,
+    type: RecordType.RECORD_3D,
+    updateDate: undefined
   };
 };
 
@@ -100,7 +103,6 @@ export const createInvalidMetadata = (): unknown => {
   return {
     productId: Math.floor(Math.random() * listOfRandomWords.length).toString(),
     productName: Math.floor(Math.random() * listOfRandomWords.length).toString(),
-    // productVersion: faker.random.number(maxResolutionMeter),
     productType: randWord(),
     description: Math.floor(Math.random() * listOfRandomWords.length).toString(),
     creationDate: randPastDate().toISOString(),

@@ -1,6 +1,6 @@
 {
   "openapiConfig": {
-    "filePath": "./openapi3.yaml",
+    "filePath": "./bundledApi.yaml",
     "basePath": "/docs",
     "rawPath": "/api",
     "uiPath": "/api"
@@ -10,7 +10,7 @@
     "prettyPrint": false
   },
   "server": {
-    "port": "8080"
+    "port": "8081"
   },
   "jobUrl": "https://job-manager-3d-dev-discrete-ingestion-db-route-3d-dev.apps.v0h0bdx6.eastus.aroapp.io/jobs",
   "flowUrl": "http://10.8.1.9:8083/flows",

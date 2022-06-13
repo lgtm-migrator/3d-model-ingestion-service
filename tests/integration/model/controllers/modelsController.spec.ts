@@ -27,7 +27,7 @@ describe('ModelsController', function () {
         expect(response.status).toBe(httpStatusCodes.CREATED);
         expect(response.body).toHaveProperty('modelPath', validRequest.modelPath);
         expect(response.body).toHaveProperty('tilesetFilename', validRequest.tilesetFilename);
-        expect(response.body).toHaveProperty('metadata', validRequest.metadata);
+        expect(response.body).toHaveProperty('metadata');
         //expect(response.body).toHaveProperty('metadata', convertTimestampToISOString(validRequest.metadata));
       });
     });
@@ -41,6 +41,7 @@ describe('ModelsController', function () {
         expect(response.status).toBe(httpStatusCodes.BAD_REQUEST);
         expect(response.body).toHaveProperty('message', "request.body should have required property 'modelPath'");
       });
+
       it('should return 400 status code and error message if tileset filename field is missing', async function () {
         const invalidRequest = { modelPath: createModelPath(), metadata: createMetadata() };
 
@@ -49,6 +50,7 @@ describe('ModelsController', function () {
         expect(response.status).toBe(httpStatusCodes.BAD_REQUEST);
         expect(response.body).toHaveProperty('message', "request.body should have required property 'tilesetFilename'");
       });
+
       it('should return 400 status code and error message if metadata field is missing', async function () {
         const invalidRequest = { modelPath: createModelPath(), tilesetFilename: createTilesetFilename() };
 
@@ -57,6 +59,7 @@ describe('ModelsController', function () {
         expect(response.status).toBe(httpStatusCodes.BAD_REQUEST);
         expect(response.body).toHaveProperty('message', "request.body should have required property 'metadata'");
       });
+
       it('should return 400 status code and error message if metadata is invalid', async function () {
         const invalidRequest = { modelPath: createModelPath(), tilesetFilename: createTilesetFilename(), metadata: createInvalidMetadata() };
 

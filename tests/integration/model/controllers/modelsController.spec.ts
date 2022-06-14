@@ -67,6 +67,26 @@ describe('ModelsController', function () {
 
         expect(response.status).toBe(httpStatusCodes.BAD_REQUEST);
       });
+
+      it('should return 400 status code and error message if region is empty', async function () {
+        const validRequest = { modelPath: createModelPath(), tilesetFilename: createTilesetFilename(), metadata: createMetadata() };
+        validRequest.metadata.region = [];
+
+        const response = await requestSender.createModel(validRequest);
+
+        expect(response.status).toBe(httpStatusCodes.BAD_REQUEST);
+        expect(response.body).toHaveProperty('message', `request.body.metadata.region should NOT have fewer than 1 items`);
+      });
+
+      it('should return 400 status code and error message if sensors is empty', async function () {
+        const validRequest = { modelPath: createModelPath(), tilesetFilename: createTilesetFilename(), metadata: createMetadata() };
+        validRequest.metadata.sensors = [];
+
+        const response = await requestSender.createModel(validRequest);
+
+        expect(response.status).toBe(httpStatusCodes.BAD_REQUEST);
+        expect(response.body).toHaveProperty('message', `request.body.metadata.sensors should NOT have fewer than 1 items`);
+      });
     });
 
     describe('Sad Path 😥', function () {

@@ -42,6 +42,15 @@ describe('ModelsController', function () {
         expect(response.body).toHaveProperty('message', "request.body should have required property 'modelPath'");
       });
 
+      it('should return 400 status code and error message if model path field is wrong', async function () {
+        const invalidRequest = { tilesetFilename: createTilesetFilename(), metadata: createMetadata(), modelPath: "lala" };
+
+        const response = await requestSender.createModel(invalidRequest);
+
+        expect(response.status).toBe(httpStatusCodes.BAD_REQUEST);
+        expect(response.body).toHaveProperty('message', "Unknown model path- the model isnt in the agreed folder");
+      });
+
       it('should return 400 status code and error message if tileset filename field is missing', async function () {
         const invalidRequest = { modelPath: createModelPath(), metadata: createMetadata() };
 

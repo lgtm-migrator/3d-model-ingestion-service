@@ -21,9 +21,9 @@ export class ModelsManager {
 
   public async createModel(payload: Payload): Promise<Model> {
     this.logger.info(`*** Create Model ***`);
-    const modelId = uuid();
     //change model path from payload
     payload = this.validator.validateModelPath(payload);
+    const modelId = uuid();
     const createdJob: Job = await this.jobs.createJob({ resourceId: modelId, parameters: payload });
     try {
       const createdFlow: Flow = await this.flows.createFlow({ ...payload, jobId: createdJob.id });

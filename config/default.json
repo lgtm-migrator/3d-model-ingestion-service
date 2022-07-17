@@ -5,12 +5,25 @@
     "rawPath": "/api",
     "uiPath": "/api"
   },
-  "logger": {
-    "level": "info",
-    "prettyPrint": false
+  "telemetry": {
+    "logger": {
+      "level": "info",
+      "prettyPrint": true
+    }
   },
   "server": {
-    "port": "8080"
+    "port": "8080",
+    "request": {
+      "payload": {
+        "limit": "1mb"
+      }
+    },
+    "response": {
+      "compression": {
+        "enabled": true,
+        "options": null
+      }
+    }
   },
   "jobUrl": "https://job-manager-3d-dev-discrete-ingestion-db-route-3d-dev.apps.v0h0bdx6.eastus.aroapp.io/jobs",
   "flowUrl": "http://10.8.1.9:8083/flows",

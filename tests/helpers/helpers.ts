@@ -11,7 +11,7 @@ const srsOriginHelper = new RandExp('^\\(([-]?(0|[1-9]\\d*)(\\.\\d+)?;){2}[-]?(0
 const classificationHelper = new RandExp('^[0-9]$').gen();
 const listOfRandomWords = ['avi', 'אבי', 'lalalalala', 'וןםפ'];
 const maxResolutionMeter = 8000;
-const maxAbsoluteAccuracyLEP90 = 999;
+const noData = 999;
 const maxAccuracySE90 = 250;
 const maxRelativeAccuracyLEP90 = 100;
 const maxVisualAccuracy = 100;
@@ -71,8 +71,8 @@ export const createMetadata = (): Layer3DMetadata => {
     minResolutionMeter: randNumber({ min: 0, max: maxResolutionMeter }),
     maxResolutionMeter: randNumber({ min: 0, max: maxResolutionMeter }),
     nominalResolution: randNumber(),
-    maxAccuracyCE90: randNumber(),
-    absoluteAccuracyLEP90: randNumber({ min: 0, max: maxAbsoluteAccuracyLEP90 }),
+    maxAccuracyCE90: randNumber({ min: 0, max: noData }),
+    absoluteAccuracyLEP90: randNumber({ min: 0, max: noData }),
     accuracySE90: randNumber({ min: 0, max: maxAccuracySE90 }),
     relativeAccuracyLEP90: randNumber({ min: 0, max: maxRelativeAccuracyLEP90 }),
     visualAccuracy: randNumber({ min: 0, max: maxVisualAccuracy }),
@@ -111,8 +111,8 @@ export const createInvalidMetadata = (): unknown => {
     minResolutionMeter: randNumber({ min: 0, max: maxResolutionMeter }),
     maxResolutionMeter: randNumber({ min: 0, max: maxResolutionMeter }),
     nominalResolution: randNumber(),
-    maxAccuracyCE90: randNumber(),
-    absoluteAccuracyLEP90: randNumber({ min: 0, max: maxAbsoluteAccuracyLEP90 }),
+    maxAccuracyCE90: randNumber({ min: 0, max: noData }),
+    absoluteAccuracyLEP90: randNumber({ min: 0, max: noData }),
     accuracySE90: randNumber({ min: 0, max: maxAccuracySE90 }),
     relativeAccuracyLEP90: randNumber({ min: 0, max: maxRelativeAccuracyLEP90 }),
     visualAccuracy: randNumber({ min: 0, max: maxVisualAccuracy }),

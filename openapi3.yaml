@@ -57,13 +57,14 @@ components:
         modelPath:
           type: string
           description: Model files location path
-          example: '\\\\domtest\\mimi\\archi\\maz\\silver\\libot\\NewYork'
+          example: '\\domtest\mimi\archi\maz\silver\libot\NewYork'
         tilesetFilename:
           type: string
           description: Model tileset filename
           example: 'tileset.json'
         metadata:
           $ref: './Schema/3dCatalog/3dMetadata.yaml#/components/schemas/payload'
+      additionalProperties: false
     model:
       type: object
       description: 3d model metadata for 3d model upload

@@ -112,5 +112,4 @@ reports
 values.*.yaml
 
 # generated files
-bundledApi.yaml
 Schema

@@ -26,13 +26,17 @@ export class ModelsManager {
     const productSource: string = payload.modelPath;
     //change model path from payload
     payload = this.validator.validateModelPath(payload);
-    
-    const request: PayloadRequest = { modelPath: payload.modelPath, tilesetFilename: payload.tilesetFilename, metadata: {...payload.metadata, productSource: productSource}}
+
+    const request: PayloadRequest = {
+      modelPath: payload.modelPath,
+      tilesetFilename: payload.tilesetFilename,
+      metadata: { ...payload.metadata, productSource: productSource },
+    };
 
     const createdJob: Job = await this.jobs.createJob({ resourceId: modelId, parameters: request });
     try {
       const createdFlow: Flow = await this.flows.createFlow({ ...request, jobId: createdJob.id });
-      return { ...createdFlow, modelId};
+      return { ...createdFlow, modelId };
     } catch (error) {
       await this.jobs.updateJobStatus(createdJob.id, { status: 'Failed', reason: 'Connection error to Nifi' });
       throw error;

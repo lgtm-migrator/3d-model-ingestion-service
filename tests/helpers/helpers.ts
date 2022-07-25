@@ -101,8 +101,8 @@ export const createMetadata = (): Layer3DMetadata => {
   return {
     ...createMetadataWithoutPath(),
     productSource: randWord(),
-  }
-}
+  };
+};
 
 export const createInvalidMetadata = (): unknown => {
   return {

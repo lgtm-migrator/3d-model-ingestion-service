@@ -4,8 +4,8 @@ replicaCount: 1
 service:
   internalPort: 8080
   externalPort: 8080
-jobServiceUrl: http://job-manager-discrete-ingestion-db/jobs
-flowServiceUrl: 'http://10.8.1.9:8083/flows'
+jobServiceUrl:  http://job-manager-int-discrete-ingestion-db/jobs
+flowServiceUrl: 'http://10.8.1.9:8084/flows'
 paths:
   mountPath: /home/libotadmin
   basePath: \\domtest\mimi\archi\maz\silver\libot
@@ -27,7 +27,7 @@ route:
 storage:
   ingestionSourcePvc:
     enabled: false
-    name: 3d-pvc
+    name: 3d-pvc-int
     size: 5Gi
     subPath: ingestion-source
   storageClass: azure-file

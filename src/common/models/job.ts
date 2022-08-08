@@ -1,4 +1,3 @@
-import { Payload } from './payload';
 import { PayloadRequest } from './request';
 
 export interface Job {

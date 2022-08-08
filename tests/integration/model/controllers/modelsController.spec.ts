@@ -2,7 +2,7 @@ import httpStatusCodes from 'http-status-codes';
 import mockAxios from 'jest-mock-axios';
 import { container } from 'tsyringe';
 import { Model } from '../../../../src/common/models/model';
-import { createInvalidMetadata, createMetadata, createMetadataWithoutPath, createModelPath, createTilesetFilename } from '../../../helpers/helpers';
+import { createInvalidMetadata, createMetadata, createMetadataWithoutProductSource, createModelPath, createTilesetFilename } from '../../../helpers/helpers';
 import { registerTestValues } from '../../testContainerConfig';
 import * as requestSender from './helpers/requestSender';
 
@@ -19,7 +19,7 @@ describe('ModelsController', function () {
   describe('POST /models', function () {
     describe('Happy Path 🙂', function () {
       it('should return 201 status code and the added model', async function () {
-        const validRequest = { modelPath: createModelPath(), tilesetFilename: createTilesetFilename(), metadata: createMetadataWithoutPath() };
+        const validRequest = { modelPath: createModelPath(), tilesetFilename: createTilesetFilename(), metadata: createMetadataWithoutProductSource() };
         const model = { ...validRequest, metadata: createMetadata() };
         mockAxios.post.mockResolvedValue({ data: model });
 
@@ -32,7 +32,7 @@ describe('ModelsController', function () {
       });
 
       it('productSource should be equal to modelPath', async function () {
-        const validRequest = { modelPath: createModelPath(), tilesetFilename: createTilesetFilename(), metadata: createMetadataWithoutPath() };
+        const validRequest = { modelPath: createModelPath(), tilesetFilename: createTilesetFilename(), metadata: createMetadataWithoutProductSource() };
         const model = { ...validRequest, metadata: createMetadata() };
         model.metadata.productSource = validRequest.modelPath;
         mockAxios.post.mockResolvedValue({ data: model });
@@ -46,7 +46,7 @@ describe('ModelsController', function () {
 
     describe('Bad Path 😡', function () {
       it('should return 400 status code and error message if model path field is missing', async function () {
-        const invalidRequest = { tilesetFilename: createTilesetFilename(), metadata: createMetadataWithoutPath() };
+        const invalidRequest = { tilesetFilename: createTilesetFilename(), metadata: createMetadataWithoutProductSource() };
 
         const response = await requestSender.createModel(invalidRequest);
 
@@ -55,7 +55,7 @@ describe('ModelsController', function () {
       });
 
       it('should return 400 status code and error message if tileset filename field is missing', async function () {
-        const invalidRequest = { modelPath: createModelPath(), metadata: createMetadataWithoutPath() };
+        const invalidRequest = { modelPath: createModelPath(), metadata: createMetadataWithoutProductSource() };
 
         const response = await requestSender.createModel(invalidRequest);
 
@@ -81,7 +81,7 @@ describe('ModelsController', function () {
       });
 
       it('should return 400 status code and error message if region is empty', async function () {
-        const validRequest = { modelPath: createModelPath(), tilesetFilename: createTilesetFilename(), metadata: createMetadataWithoutPath() };
+        const validRequest = { modelPath: createModelPath(), tilesetFilename: createTilesetFilename(), metadata: createMetadataWithoutProductSource() };
         validRequest.metadata.region = [];
 
         const response = await requestSender.createModel(validRequest);
@@ -91,7 +91,7 @@ describe('ModelsController', function () {
       });
 
       it('should return 400 status code and error message if sensors is empty', async function () {
-        const validRequest = { modelPath: createModelPath(), tilesetFilename: createTilesetFilename(), metadata: createMetadataWithoutPath() };
+        const validRequest = { modelPath: createModelPath(), tilesetFilename: createTilesetFilename(), metadata: createMetadataWithoutProductSource() };
         validRequest.metadata.sensors = [];
 
         const response = await requestSender.createModel(validRequest);
@@ -103,7 +103,7 @@ describe('ModelsController', function () {
 
     describe('Sad Path 😥', function () {
       it('should return 500 status code if a network exception happens', async function () {
-        const validRequest = { modelPath: createModelPath(), tilesetFilename: createTilesetFilename(), metadata: createMetadataWithoutPath() };
+        const validRequest = { modelPath: createModelPath(), tilesetFilename: createTilesetFilename(), metadata: createMetadataWithoutProductSource() };
         mockAxios.post.mockRejectedValue(new Error('Service is not available'));
 
         const response = await requestSender.createModel(validRequest);

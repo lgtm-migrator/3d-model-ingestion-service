@@ -59,7 +59,7 @@ export const createTilesetFilename = (): string => {
   return 'tileset.json';
 };
 
-export const createMetadataWithoutPath = (): IPayload => {
+export const createMetadataWithoutProductSource = (): IPayload => {
   return {
     productId: Math.floor(Math.random() * listOfRandomWords.length).toString(),
     productName: Math.floor(Math.random() * listOfRandomWords.length).toString(),
@@ -99,7 +99,7 @@ export const createMetadataWithoutPath = (): IPayload => {
 
 export const createMetadata = (): Layer3DMetadata => {
   return {
-    ...createMetadataWithoutPath(),
+    ...createMetadataWithoutProductSource(),
     productSource: randWord(),
   };
 };

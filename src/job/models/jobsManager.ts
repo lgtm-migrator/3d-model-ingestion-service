@@ -24,7 +24,6 @@ export class JobsManager {
   }
 
   public async updateJobStatus(jobId: string, payload: JobUpdatePayload): Promise<void> {
-    console.log('ENTER UPDATE JOB STATUS');
     const url = this.config.get<string>('jobUrl');
     const updateUrl = `${url}/${jobId}`;
     await axios.put(updateUrl, payload);

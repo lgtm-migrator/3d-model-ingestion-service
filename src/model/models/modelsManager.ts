@@ -25,6 +25,7 @@ export class ModelsManager {
     //change model path from payload
     payload = this.validator.validateModelPath(payload);
     const createdJob: Job = await this.jobs.createJob({ resourceId: modelId, parameters: payload });
+    this.logger.info(`Job id: ${createdJob.id}`);
     try {
       const createdFlow: Flow = await this.flows.createFlow({ ...payload, jobId: createdJob.id });
       return { ...createdFlow, modelId };

@@ -7,7 +7,8 @@ import { middleware as OpenApiMiddleware } from 'express-openapi-validator';
 import { container, inject, injectable } from 'tsyringe';
 import getStorageExplorerMiddleware from '@map-colonies/storage-explorer-middleware';
 import { Logger } from '@map-colonies/js-logger';
-import { RequestLogger } from './common/middlewares/RequestLogger';
+import httpLogger from '@map-colonies/express-access-log-middleware';
+//import { RequestLogger } from './common/middlewares/RequestLogger';
 import { SERVICES } from './common/constants';
 import { IConfig } from './common/interfaces';
 import { modelsRouterFactory } from './model/routes/modelsRouter';
@@ -19,7 +20,6 @@ export class ServerBuilder {
 
   public constructor(
     @inject(SERVICES.CONFIG) private readonly config: IConfig,
-    private readonly requestLogger: RequestLogger,
     @inject(SERVICES.LOGGER) private readonly logger: Logger
   ) {
     this.serverInstance = express();
@@ -46,6 +46,7 @@ export class ServerBuilder {
   }
 
   private registerPreRoutesMiddleware(): void {
+    this.serverInstance.use(httpLogger({ logger: this.logger }));
     this.serverInstance.use(cors());
     this.serverInstance.use(bodyParser.json());
 
@@ -53,7 +54,7 @@ export class ServerBuilder {
     const apiSpecPath = this.config.get<string>('openapiConfig.filePath');
     this.serverInstance.use(OpenApiMiddleware({ apiSpec: apiSpecPath, validateRequests: true, ignorePaths: ignorePathRegex }));
 
-    this.serverInstance.use(this.requestLogger.getLoggerMiddleware());
+    
   }
 
   private registerPostRoutesMiddleware(): void {

@@ -18,10 +18,7 @@ import { mountDirs } from './common/models/mountDirs';
 export class ServerBuilder {
   private readonly serverInstance: express.Application;
 
-  public constructor(
-    @inject(SERVICES.CONFIG) private readonly config: IConfig,
-    @inject(SERVICES.LOGGER) private readonly logger: Logger
-  ) {
+  public constructor(@inject(SERVICES.CONFIG) private readonly config: IConfig, @inject(SERVICES.LOGGER) private readonly logger: Logger) {
     this.serverInstance = express();
   }
 
@@ -53,8 +50,6 @@ export class ServerBuilder {
     const ignorePathRegex = new RegExp(`^(${this.config.get<string>('openapiConfig.basePath')})|(explorer)/.*`, 'i');
     const apiSpecPath = this.config.get<string>('openapiConfig.filePath');
     this.serverInstance.use(OpenApiMiddleware({ apiSpec: apiSpecPath, validateRequests: true, ignorePaths: ignorePathRegex }));
-
-    
   }
 
   private registerPostRoutesMiddleware(): void {

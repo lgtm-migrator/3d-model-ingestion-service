@@ -8,7 +8,6 @@ import { container, inject, injectable } from 'tsyringe';
 import getStorageExplorerMiddleware from '@map-colonies/storage-explorer-middleware';
 import { Logger } from '@map-colonies/js-logger';
 import httpLogger from '@map-colonies/express-access-log-middleware';
-//import { RequestLogger } from './common/middlewares/RequestLogger';
 import { SERVICES } from './common/constants';
 import { IConfig } from './common/interfaces';
 import { modelsRouterFactory } from './model/routes/modelsRouter';

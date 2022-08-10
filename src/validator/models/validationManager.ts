@@ -18,7 +18,7 @@ export class ValidationManager {
       payload['modelPath'] = newModelPath;
       return payload;
     }
-    this.logger.error({ msg: 'Unknown model path- the model isnt in the agreed folder', recieved: basePath, expected: mountPath });
+    this.logger.error({ msg: 'Unknown model path- the model isnt in the agreed folder', recieved: payload['modelPath'], expected: basePath });
     throw new ModelPathNotSupported('unsupported model path');
   }
 }

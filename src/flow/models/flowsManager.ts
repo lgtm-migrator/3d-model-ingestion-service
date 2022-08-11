@@ -11,9 +11,10 @@ export class FlowsManager {
   public constructor(@inject(SERVICES.CONFIG) private readonly config: IConfig, @inject(SERVICES.LOGGER) private readonly logger: Logger) {}
 
   public async createFlow(payload: FlowPayload): Promise<Flow> {
-    this.logger.info(`Create a new flow: ${JSON.stringify(payload)}`);
+    this.logger.debug({ msg: 'got a request for a new flow', flowPayload: payload });
     const url = this.config.get<string>('flowUrl');
     const response = await axios.post<Flow>(url, payload);
+    this.logger.debug({ msg: 'sent to Nifi successfully' });
     return response.data;
   }
 }

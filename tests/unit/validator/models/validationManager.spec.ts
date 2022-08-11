@@ -2,6 +2,7 @@ import config from 'config';
 import jsLogger from '@map-colonies/js-logger';
 import { ValidationManager } from '../../../../src/validator/models/validationManager';
 import { Payload } from '../../../../src/common/models/payload';
+import { ModelPathNotSupported } from '../../../../src/common/models/errors';
 import { createMetadata, createModelPath, createTilesetFilename, createMountedModelPath, createWrongModelPath } from '../../../helpers/helpers';
 
 describe('ValidationManager', () => {
@@ -31,7 +32,7 @@ describe('ValidationManager', () => {
       const data: Payload = { modelPath: createWrongModelPath(), tilesetFilename: createTilesetFilename(), metadata: createMetadata() };
       expect(() => {
         validationManager.validateModelPath(data);
-      }).toThrow('Unknown model path- the model isnt in the agreed folder');
+      }).toThrow(ModelPathNotSupported);
     });
   });
 });

@@ -6,7 +6,7 @@
     "uiPath": "/api"
   },
   "logger": {
-    "level": "info",
+    "level": "debug",
     "prettyPrint": false
   },
   "server": {

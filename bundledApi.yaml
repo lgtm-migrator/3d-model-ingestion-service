@@ -218,7 +218,7 @@ components:
         - sourceDateStart
         - sourceDateEnd
         - maxAccuracyCE90
-        - absoluteAccuracyLE90
+        - absoluteAccuracyLEP90
         - sensors
         - footprint
         - srsId
@@ -281,13 +281,20 @@ components:
           minimum: 0.01
           maximum: 8000
           description: Maximum resolution in meters
+        nominalResolution:
+          type: number
+          format: double
+          nullable: true
+          example: 5
+          minimum: 0
+          description: Number of points in one size unit
         maxAccuracyCE90:
           type: number
           format: double
           minimum: 0
           maximum: 999
           description: Maximum absolute horizontal accuracy
-        absoluteAccuracyLE90:
+        absoluteAccuracyLEP90:
           type: number
           format: double
           minimum: 0
@@ -300,7 +307,7 @@ components:
           nullable: true
           maximum: 250
           description: Absolute spherical accuracy
-        relativeAccuracySE90:
+        relativeAccuracyLEP90:
           type: number
           format: double
           nullable: true
@@ -346,6 +353,12 @@ components:
           type: string
           description: Name of the srsID
           default: WGS84GEO
+        srsOrigin:
+          type: string
+          nullable: true
+          example: (30;40;50)
+          pattern: ^\(([-]?(0|[1-9]\d*)(\.\d+)?;){2}[-]?(0|[1-9]\d*)(\.\d+)?\)$
+          description: First of axes
         region:
           type: array
           items:
@@ -368,6 +381,11 @@ components:
           type: string
           description: The name of the producer (product owner)
           default: IDFMU
+        productionMethod:
+          type: string
+          nullable: true
+          description: Method of the production
+          default: photogrammetric
         minFlightAlt:
           type: number
           format: double
@@ -381,16 +399,4 @@ components:
           type: string
           nullable: true
           description: Area inside the region
-        productStatus:
-          type: string
-          default: UNPUBLISHED
-          description: The status of the model
-        productSource:
-          type: string
-          readOnly: true
-          description: The path of the model
-        keywords:
-          type: string
-          nullable: true
-          description: The keywords of the product
       additionalProperties: false

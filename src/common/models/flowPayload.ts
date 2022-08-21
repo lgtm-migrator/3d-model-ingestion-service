@@ -1,6 +1,6 @@
-import { PayloadRequest } from './request';
+import { Payload } from './payload';
 
-export interface FlowPayload extends PayloadRequest {
+export interface FlowPayload extends Payload {
   /**
    * Ingestion job unique identifier
    */

@@ -1,4 +1,4 @@
-import { IPayload } from '../dataModels/records';
+import { Layer3DMetadata } from '@map-colonies/mc-model-types';
 
 export interface Payload {
   /**
@@ -12,5 +12,5 @@ export interface Payload {
   /**
    * Metadata
    */
-  metadata: IPayload;
+  metadata: Layer3DMetadata;
 }

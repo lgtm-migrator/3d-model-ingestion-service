@@ -1,6 +1,6 @@
-import { PayloadRequest } from './request';
+import { Payload } from './payload';
 
-export interface Model extends PayloadRequest {
+export interface Model extends Payload {
   /**
    * Ingestion model unique identifier
    */

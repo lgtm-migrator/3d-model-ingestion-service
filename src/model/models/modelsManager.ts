@@ -9,7 +9,6 @@ import { Job } from '../../common/models/job';
 import { Model } from '../../common/models/model';
 import { Payload } from '../../common/models/payload';
 import { ValidationManager } from '../../validator/models/validationManager';
-import { PayloadRequest } from '../../common/models/request';
 
 @injectable()
 export class ModelsManager {
@@ -24,20 +23,12 @@ export class ModelsManager {
     this.logger.debug({ msg: 'started ingestion of new model' });
     //TODO: use this id for ingestion- send to NiFi and use this in links. will need to change the request to catalog in post that recieves this id
     const modelId = uuid();
-    const productSource: string = payload.modelPath;
     //change model path from payload
     payload = this.validator.validateModelPath(payload);
-
-    const request: PayloadRequest = {
-      modelPath: payload.modelPath,
-      tilesetFilename: payload.tilesetFilename,
-      metadata: { ...payload.metadata, productSource: productSource },
-    };
-
-    const createdJob: Job = await this.jobs.createJob({ resourceId: modelId, parameters: request });
+    const createdJob: Job = await this.jobs.createJob({ resourceId: modelId, parameters: payload });
     this.logger.info({ msg: 'created job', jobId: createdJob.id });
     try {
-      const createdFlow: Flow = await this.flows.createFlow({ ...request, jobId: createdJob.id });
+      const createdFlow: Flow = await this.flows.createFlow({ ...payload, jobId: createdJob.id });
       return { ...createdFlow, modelId };
     } catch (error) {
       this.logger.error({ msg: 'Error in creating a flow' });

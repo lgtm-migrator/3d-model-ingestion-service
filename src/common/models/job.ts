@@ -1,4 +1,4 @@
-import { PayloadRequest } from './request';
+import { Payload } from './payload';
 
 export interface Job {
   /**
@@ -24,7 +24,7 @@ export interface Job {
   /**
    * Job parameters
    */
-  parameters: PayloadRequest;
+  parameters: Payload;
   /**
    * Record creation date
    */

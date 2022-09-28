@@ -1,4 +1,4 @@
-import { Payload } from './payload';
+import { PayloadRequest } from './request';
 
 export interface JobPayload {
   /**
@@ -20,7 +20,7 @@ export interface JobPayload {
   /**
    * Job parameters
    */
-  parameters: Payload;
+  parameters: PayloadRequest;
   /**
    * Ingestion flow status
    */

@@ -20,7 +20,7 @@
     "start:ts": "ts-node ./src/index.ts",
     "start": "npm run build && cd dist && node ./index.js",
     "assets:copy": "copyfiles -f ./config/* ./dist/config && copyfiles -f ./bundledApi.yaml ./dist/ && copyfiles ./package.json dist",
-    "clean": "rimraf dist",
+    "clean": "rimraf dist reports",
     "copySchema": "copyfiles -u 5 \"./node_modules/@map-colonies/mc-model-types/Schema/yaml/**/*\" ./Schema",
     "prebundleOpenApi": "npm run copySchema",
     "bundleOpenApi": "openapi bundle --output ./bundledApi.yaml --ext yaml ./openapi3.yaml",
@@ -106,6 +106,6 @@
     "supertest": "^6.2.3",
     "ts-jest": "^28.0.2",
     "ts-node": "^10.8.0",
-    "typescript": "^4.6.4"
+    "typescript": "4.7.4"
   }
 }

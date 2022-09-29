@@ -12,7 +12,7 @@
   "server": {
     "port": "8082"
   },
-  "jobUrl": "https://jm-test-pr-job-manager-route-3d-dev.apps.j1lk3njp.eastus.aroapp.io/jobs",
+  "jobUrl": "https://job-manager-discrete-ingestion-db-route-3d-dev.apps.j1lk3njp.eastus.aroapp.io/jobs",
   "flowUrl": "http://10.8.1.9:8083/flows",
   "paths": {
     "mountPath": "/home/libotadmin",
